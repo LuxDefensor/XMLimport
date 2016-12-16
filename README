@@ -1,0 +1,8 @@
+The factory application in the Piramida 2000 smart metering system by this company: http://www.sicon.ru/about_company/ 
+has a few drawbacks. One of them is a poor performance when the database size excedes some 30 Gb.
+I have to admit that our company didn't purchase the updates for several years due to financial shortage, so maybe they 
+have fixed this issue by now. But still, the default app is quite inconvenient, so I replaced it with another one.
+As a temporary solution I developed an app in Microsoft Excel which did a great job, but had some issues itself.
+So now it's time to develop a real XML Import application, which is what this project is.
+It's main purpose is to pick xml files from a disignated folder one by one and then parse them and write the data into the 
+database.
