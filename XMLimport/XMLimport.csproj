@@ -44,14 +44,77 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FolderWatcher.cs" />
+    <Compile Include="formCheck.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="formCheck.Designer.cs">
+      <DependentUpon>formCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="formFind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formFind.Designer.cs">
+      <DependentUpon>formFind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formIgnoreList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formIgnoreList.Designer.cs">
+      <DependentUpon>formIgnoreList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formInput.Designer.cs">
+      <DependentUpon>formInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMain.Designer.cs">
+      <DependentUpon>formMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSettings.Designer.cs">
+      <DependentUpon>formSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formTest.Designer.cs">
+      <DependentUpon>formTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logger.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Unarchive.cs" />
+    <Compile Include="XMLFeeder.cs" />
+    <EmbeddedResource Include="formCheck.resx">
+      <DependentUpon>formCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formFind.resx">
+      <DependentUpon>formFind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formIgnoreList.resx">
+      <DependentUpon>formIgnoreList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formInput.resx">
+      <DependentUpon>formInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMain.resx">
+      <DependentUpon>formMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSettings.resx">
+      <DependentUpon>formSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formTest.resx">
+      <DependentUpon>formTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -70,6 +133,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="XMLimport.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IgnoreStatus.lst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Rar.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLCodes.lst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
