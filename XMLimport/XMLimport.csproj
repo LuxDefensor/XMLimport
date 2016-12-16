@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archiver.cs" />
     <Compile Include="FolderWatcher.cs" />
     <Compile Include="formCheck.cs">
       <SubType>Form</SubType>
