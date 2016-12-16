@@ -35,6 +35,7 @@
             this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuXML = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCheckXML = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFindXML = new System.Windows.Forms.ToolStripMenuItem();
             this.menuService = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIgnoreList = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +74,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.menuFindXML = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.txtArc = new System.Windows.Forms.ToolStripTextBox();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -88,7 +90,7 @@
             this.menuService});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(816, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1032, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -120,6 +122,12 @@
             this.menuCheckXML.Name = "menuCheckXML";
             this.menuCheckXML.Size = new System.Drawing.Size(161, 22);
             this.menuCheckXML.Text = "Проверить XML";
+            // 
+            // menuFindXML
+            // 
+            this.menuFindXML.Name = "menuFindXML";
+            this.menuFindXML.Size = new System.Drawing.Size(161, 22);
+            this.menuFindXML.Text = "Найти XML";
             // 
             // menuService
             // 
@@ -156,7 +164,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(816, 490);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1032, 490);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // toolStrip1
@@ -172,10 +180,12 @@
             this.toolStripLabel3,
             this.txtUnarchStat,
             this.toolStripLabel4,
-            this.txtXML});
+            this.txtXML,
+            this.toolStripLabel5,
+            this.txtArc});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(816, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1032, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -223,7 +233,7 @@
             // txtWatcherStat
             // 
             this.txtWatcherStat.Name = "txtWatcherStat";
-            this.txtWatcherStat.Size = new System.Drawing.Size(150, 25);
+            this.txtWatcherStat.Size = new System.Drawing.Size(100, 25);
             // 
             // toolStripLabel3
             // 
@@ -234,7 +244,7 @@
             // txtUnarchStat
             // 
             this.txtUnarchStat.Name = "txtUnarchStat";
-            this.txtUnarchStat.Size = new System.Drawing.Size(150, 25);
+            this.txtUnarchStat.Size = new System.Drawing.Size(100, 25);
             // 
             // toolStripLabel4
             // 
@@ -245,7 +255,7 @@
             // txtXML
             // 
             this.txtXML.Name = "txtXML";
-            this.txtXML.Size = new System.Drawing.Size(150, 25);
+            this.txtXML.Size = new System.Drawing.Size(100, 25);
             // 
             // panel1
             // 
@@ -272,7 +282,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(810, 144);
+            this.panel1.Size = new System.Drawing.Size(1026, 144);
             this.panel1.TabIndex = 1;
             // 
             // txtStatus
@@ -428,7 +438,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFileName.Location = new System.Drawing.Point(82, 6);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(719, 20);
+            this.txtFileName.Size = new System.Drawing.Size(935, 20);
             this.txtFileName.TabIndex = 1;
             // 
             // label1
@@ -446,24 +456,29 @@
             this.txtLog.Location = new System.Drawing.Point(3, 178);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(810, 309);
+            this.txtLog.Size = new System.Drawing.Size(1026, 309);
             this.txtLog.TabIndex = 2;
             // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             // 
-            // menuFindXML
+            // toolStripLabel5
             // 
-            this.menuFindXML.Name = "menuFindXML";
-            this.menuFindXML.Size = new System.Drawing.Size(161, 22);
-            this.menuFindXML.Text = "Найти XML";
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(64, 22);
+            this.toolStripLabel5.Text = "архивация";
+            // 
+            // txtArc
+            // 
+            this.txtArc.Name = "txtArc";
+            this.txtArc.Size = new System.Drawing.Size(100, 25);
             // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(816, 514);
+            this.ClientSize = new System.Drawing.Size(1032, 514);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -528,6 +543,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuIgnoreList;
         private System.Windows.Forms.ToolStripMenuItem menuCheckXML;
         private System.Windows.Forms.ToolStripMenuItem menuFindXML;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
+        private System.Windows.Forms.ToolStripTextBox txtArc;
     }
 }
 
