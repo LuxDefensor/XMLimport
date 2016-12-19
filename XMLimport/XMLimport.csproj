@@ -145,6 +145,9 @@
     <Content Include="Rar.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="unzip.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="XMLCodes.lst">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

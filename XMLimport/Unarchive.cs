@@ -13,14 +13,16 @@ namespace XMLimport
     {
         private string inbox;
         private formMain main;
-        private string filter;
+        private string appFolder = Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+        private string filterRAR, filterZIP;
         private bool isRunning;
 
         public Unarchive(formMain mainForm, string inboxFolder)
         {
             main = mainForm;
             inbox = inboxFolder;
-            filter = @"\w+.zip|\w+.rar";
+            filterRAR = @"\w+.rar$";
+            filterZIP = @"\w+.zip$";
         }
 
         public void EndProcess()
@@ -31,7 +33,8 @@ namespace XMLimport
         public void StartProcess()
         {
             isRunning = true;
-            Regex regex = new Regex(filter);
+            Regex regexZIP = new Regex(filterZIP);
+            Regex regexRAR = new Regex(filterRAR);
             Process p;
             while (isRunning)
             {
@@ -39,19 +42,28 @@ namespace XMLimport
                 {
                     foreach (string f in Directory.GetFiles(inbox))
                     {
-                        if (regex.IsMatch(f))
+                        if (regexRAR.IsMatch(f))
                         {
                             try
                             {
-                                p = new Process();
-                                p.StartInfo = new ProcessStartInfo("rar.exe", "e -y " + f + " " + inbox);
-                                p.Start();
-                                p.WaitForExit();
-                                if (p.ExitCode == 0)
+                                Extract(f, Path.Combine(appFolder, "rar.exe"), "e -y " + f + " " + inbox);
+                            }
+                            catch (Exception ex)
+                            {
+                                lock (main.Logger)
                                 {
-                                    Thread.Sleep(500);
-                                    File.Delete(f);
+                                    main.Logger.WriteError("Не удалось распаковать " + f + ": " + ex.Message);
                                 }
+                                File.Move(f,
+                                    f + "_error"); // I deliberately cling it after the extension so that 
+                                                   // program ingore it from now on until a human takes care of the file
+                            }
+                        }
+                        else if (regexZIP.IsMatch(f))
+                        {
+                            try
+                            {
+                                Extract(f, Path.Combine(appFolder, "unzip.exe"), "-q " + f);
                             }
                             catch (Exception ex)
                             {
@@ -70,6 +82,21 @@ namespace XMLimport
                 Thread.Sleep(1000);
             }
 
+        }
+
+        private void Extract(string fileName, string command, string args)
+        {
+            Process p;
+            p = new Process();            
+            p.StartInfo = new ProcessStartInfo(command, args);
+            p.StartInfo.WorkingDirectory = inbox;
+            p.Start();
+            p.WaitForExit();
+            if (p.ExitCode == 0)
+            {
+                Thread.Sleep(500);
+                File.Delete(fileName);
+            }
         }
     }
 }
