@@ -28,6 +28,7 @@ namespace XMLimport
         public void StartProcess()
         {
             isRunning = true;
+            isRunning = false; // I'n mot ready yet to implement this correctly
             Process p;
             FileInfo file;
             while (isRunning)
