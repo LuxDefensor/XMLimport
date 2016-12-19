@@ -34,7 +34,7 @@ namespace XMLimport
             {
                 if (main.Process)
                 {
-                    foreach (string f in Directory.GetFiles(s.InboxFolder))
+                    foreach (string f in Directory.GetFiles(s.ArchiveFolder))
                     {
                         file = new FileInfo(f);
                         if (file.LastWriteTime.AddMonths(2) < DateTime.Today && Path.GetExtension(f) == ".xml")

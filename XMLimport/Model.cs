@@ -465,7 +465,7 @@ namespace XMLimport
         /// <param name="appID"></param>
         /// <param name="rewrite"></param>
         public void WriteOneRecord(int parNumber, DateTime dataDate, int objectCode, int itemCode, int objType,
-            float value, int p2kStatus, int p2kStatusH, int appID, bool rewrite)
+            string value, int p2kStatus, int p2kStatusH, int appID, bool rewrite)
         {
             using (SqlConnection cn = new SqlConnection(cs))
             {

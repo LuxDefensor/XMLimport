@@ -466,7 +466,7 @@ namespace XMLimport
                                             if (IgnoreStatus || val.Attributes.Count == 0 || val.Attributes["status"].Value == "0")
                                             {
                                                 m.WriteOneRecord(12, timePoint, int.Parse(deviceCode), int.Parse(sensorCode),
-                                                    0, value, 0, 0, 0, rewrite);
+                                                    0, value.ToString().Replace(',','.'), 0, 0, 0, rewrite);
                                                 completed++;
                                             }
                                             main.CurrentProgress = completed;
