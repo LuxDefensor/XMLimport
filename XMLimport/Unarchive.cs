@@ -21,7 +21,7 @@ namespace XMLimport
         {
             main = mainForm;
             inbox = inboxFolder;
-            filterRAR = @"\w+.rar$";
+            filterRAR = @"\w+.rar$|\w+.zip$";
             filterZIP = @"\w+.zip$";
         }
 
@@ -46,7 +46,7 @@ namespace XMLimport
                         {
                             try
                             {
-                                Extract(f, Path.Combine(appFolder, "rar.exe"), "e -y " + f + " " + inbox);
+                                Extract(f, Path.Combine(appFolder, "rar.exe"), "e -y " + f);
                             }
                             catch (Exception ex)
                             {
@@ -54,9 +54,8 @@ namespace XMLimport
                                 {
                                     main.Logger.WriteError("Не удалось распаковать " + f + ": " + ex.Message);
                                 }
-                                File.Move(f,
-                                    f + "_error"); // I deliberately cling it after the extension so that 
-                                                   // program ingore it from now on until a human takes care of the file
+                                File.Move(f, f + "_error"); // I deliberately cling it after the extension so that 
+                                                            // program ingore it from now on until a human takes care of the file
                             }
                         }
                         else if (regexZIP.IsMatch(f))
@@ -71,12 +70,10 @@ namespace XMLimport
                                 {
                                     main.Logger.WriteError("Не удалось распаковать " + f + ": " + ex.Message);
                                 }
-                                File.Move(f,
-                                    f + "_error"); // I deliberately cling it after the extension so that 
-                                                   // program ingore it from now on until a human takes care of the file
+                                File.Move(f, f + "_error"); // I deliberately cling it after the extension so that 
+                                                            // program ingore it from now on until a human takes care of the file
                             }
                         }
-
                     }
                 }
                 Thread.Sleep(1000);

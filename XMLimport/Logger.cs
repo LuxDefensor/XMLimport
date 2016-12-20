@@ -52,6 +52,7 @@ namespace XMLimport
 
         public void WriteWorkingLog(string[] info)
         {
+            // BUG: Если открыть этот лог в Excel, появляется проблема с кодировкой
             StreamWriter writer = File.AppendText(currentWorkingLog);
             writer.WriteLine(string.Join(";", info));
             writer.Close();

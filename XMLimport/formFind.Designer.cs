@@ -29,48 +29,44 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabSearch = new System.Windows.Forms.TabPage();
-            this.tabResults = new System.Windows.Forms.TabPage();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnLoad = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.dgvCodes = new System.Windows.Forms.DataGridView();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dtpDay = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.dtpDay = new System.Windows.Forms.DateTimePicker();
             this.btnFind = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtArchive = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.txtArchive = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabResults = new System.Windows.Forms.TabPage();
+            this.btnToCheck = new System.Windows.Forms.Button();
+            this.btnDeselect = new System.Windows.Forms.Button();
+            this.txtSelected = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtFound = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnToProcess = new System.Windows.Forms.Button();
             this.dgvResults = new System.Windows.Forms.DataGridView();
-            this.FileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOK = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvCodes = new System.Windows.Forms.DataGridView();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnToProcess = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtFound = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtSelected = new System.Windows.Forms.TextBox();
-            this.btnDeselect = new System.Windows.Forms.Button();
-            this.btnToCheck = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabSearch.SuspendLayout();
-            this.tabResults.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCodes)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabResults.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCodes)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -101,69 +97,51 @@
             this.tabSearch.Text = "Поиск";
             this.tabSearch.UseVisualStyleBackColor = true;
             // 
-            // tabResults
+            // dgvCodes
             // 
-            this.tabResults.Controls.Add(this.btnToCheck);
-            this.tabResults.Controls.Add(this.btnDeselect);
-            this.tabResults.Controls.Add(this.txtSelected);
-            this.tabResults.Controls.Add(this.label7);
-            this.tabResults.Controls.Add(this.txtFound);
-            this.tabResults.Controls.Add(this.label4);
-            this.tabResults.Controls.Add(this.btnToProcess);
-            this.tabResults.Controls.Add(this.dgvResults);
-            this.tabResults.Location = new System.Drawing.Point(4, 22);
-            this.tabResults.Name = "tabResults";
-            this.tabResults.Padding = new System.Windows.Forms.Padding(3);
-            this.tabResults.Size = new System.Drawing.Size(771, 477);
-            this.tabResults.TabIndex = 1;
-            this.tabResults.Text = "Результат";
-            this.tabResults.UseVisualStyleBackColor = true;
+            this.dgvCodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Code,
+            this.Title});
+            this.dgvCodes.Location = new System.Drawing.Point(9, 40);
+            this.dgvCodes.MultiSelect = false;
+            this.dgvCodes.Name = "dgvCodes";
+            this.dgvCodes.RowHeadersVisible = false;
+            this.dgvCodes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCodes.Size = new System.Drawing.Size(377, 431);
+            this.dgvCodes.TabIndex = 14;
             // 
-            // btnCancel
+            // Code
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(604, 521);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.Code.HeaderText = "Код XML";
+            this.Code.Name = "Code";
             // 
-            // btnOK
+            // Title
             // 
-            this.btnOK.Location = new System.Drawing.Point(685, 521);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 2;
-            this.btnOK.Text = "ОК";
-            this.btnOK.UseVisualStyleBackColor = true;
+            this.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Title.HeaderText = "Смежник";
+            this.Title.Name = "Title";
             // 
-            // label1
+            // panel1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(163, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Список кодов XML смежников";
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.dtpDay);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.btnFind);
+            this.panel1.Location = new System.Drawing.Point(395, 223);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(364, 61);
+            this.panel1.TabIndex = 13;
             // 
-            // btnLoad
+            // dtpDay
             // 
-            this.btnLoad.Location = new System.Drawing.Point(392, 40);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(129, 23);
-            this.btnLoad.TabIndex = 2;
-            this.btnLoad.Text = "Прочитать из файла";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(527, 40);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(129, 23);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Сохранить в файл";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.dtpDay.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.dtpDay.Location = new System.Drawing.Point(55, 30);
+            this.dtpDay.Name = "dtpDay";
+            this.dtpDay.Size = new System.Drawing.Size(187, 20);
+            this.dtpDay.TabIndex = 6;
             // 
             // label2
             // 
@@ -183,14 +161,6 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "с";
             // 
-            // dtpDay
-            // 
-            this.dtpDay.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
-            this.dtpDay.Location = new System.Drawing.Point(55, 30);
-            this.dtpDay.Name = "dtpDay";
-            this.dtpDay.Size = new System.Drawing.Size(187, 20);
-            this.dtpDay.TabIndex = 6;
-            // 
             // btnFind
             // 
             this.btnFind.ForeColor = System.Drawing.Color.Red;
@@ -200,21 +170,6 @@
             this.btnFind.TabIndex = 9;
             this.btnFind.Text = "Найти";
             this.btnFind.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(392, 86);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(308, 34);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Поиск будет производиться в архивной папке, то есть, на данный момент в:";
-            // 
-            // txtArchive
-            // 
-            this.txtArchive.Location = new System.Drawing.Point(392, 123);
-            this.txtArchive.Name = "txtArchive";
-            this.txtArchive.Size = new System.Drawing.Size(367, 20);
-            this.txtArchive.TabIndex = 11;
             // 
             // label6
             // 
@@ -226,18 +181,126 @@
             this.label6.Text = "Архивную папку можно изменить в настройках программы (меню Сервис -> Настройки)\r\n" +
     "\r\n";
             // 
-            // panel1
+            // txtArchive
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.dtpDay);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.btnFind);
-            this.panel1.Location = new System.Drawing.Point(395, 223);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(364, 61);
-            this.panel1.TabIndex = 13;
+            this.txtArchive.Location = new System.Drawing.Point(392, 123);
+            this.txtArchive.Name = "txtArchive";
+            this.txtArchive.Size = new System.Drawing.Size(367, 20);
+            this.txtArchive.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(392, 86);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(308, 34);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Поиск будет производиться в архивной папке, то есть, на данный момент в:";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(527, 40);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(129, 23);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "Сохранить в файл";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(392, 40);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(129, 23);
+            this.btnLoad.TabIndex = 2;
+            this.btnLoad.Text = "Прочитать из файла";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(163, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Список кодов XML смежников";
+            // 
+            // tabResults
+            // 
+            this.tabResults.Controls.Add(this.btnToCheck);
+            this.tabResults.Controls.Add(this.btnDeselect);
+            this.tabResults.Controls.Add(this.txtSelected);
+            this.tabResults.Controls.Add(this.label7);
+            this.tabResults.Controls.Add(this.txtFound);
+            this.tabResults.Controls.Add(this.label4);
+            this.tabResults.Controls.Add(this.btnToProcess);
+            this.tabResults.Controls.Add(this.dgvResults);
+            this.tabResults.Location = new System.Drawing.Point(4, 22);
+            this.tabResults.Name = "tabResults";
+            this.tabResults.Padding = new System.Windows.Forms.Padding(3);
+            this.tabResults.Size = new System.Drawing.Size(771, 477);
+            this.tabResults.TabIndex = 1;
+            this.tabResults.Text = "Результат";
+            this.tabResults.UseVisualStyleBackColor = true;
+            // 
+            // btnToCheck
+            // 
+            this.btnToCheck.Location = new System.Drawing.Point(490, 429);
+            this.btnToCheck.Name = "btnToCheck";
+            this.btnToCheck.Size = new System.Drawing.Size(129, 42);
+            this.btnToCheck.TabIndex = 7;
+            this.btnToCheck.Text = "На проверку";
+            this.btnToCheck.UseVisualStyleBackColor = true;
+            // 
+            // btnDeselect
+            // 
+            this.btnDeselect.Location = new System.Drawing.Point(208, 449);
+            this.btnDeselect.Name = "btnDeselect";
+            this.btnDeselect.Size = new System.Drawing.Size(162, 23);
+            this.btnDeselect.TabIndex = 6;
+            this.btnDeselect.Text = "Снять выделение";
+            this.btnDeselect.UseVisualStyleBackColor = true;
+            // 
+            // txtSelected
+            // 
+            this.txtSelected.BackColor = System.Drawing.SystemColors.Control;
+            this.txtSelected.Location = new System.Drawing.Point(133, 451);
+            this.txtSelected.Name = "txtSelected";
+            this.txtSelected.Size = new System.Drawing.Size(69, 20);
+            this.txtSelected.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(25, 454);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(102, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Выделено файлов:";
+            // 
+            // txtFound
+            // 
+            this.txtFound.BackColor = System.Drawing.SystemColors.Control;
+            this.txtFound.Location = new System.Drawing.Point(133, 426);
+            this.txtFound.Name = "txtFound";
+            this.txtFound.Size = new System.Drawing.Size(69, 20);
+            this.txtFound.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 429);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(95, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Найдено файлов:";
+            // 
+            // btnToProcess
+            // 
+            this.btnToProcess.Location = new System.Drawing.Point(625, 429);
+            this.btnToProcess.Name = "btnToProcess";
+            this.btnToProcess.Size = new System.Drawing.Size(129, 42);
+            this.btnToProcess.TabIndex = 1;
+            this.btnToProcess.Text = "На конвейер";
+            this.btnToProcess.UseVisualStyleBackColor = true;
             // 
             // dgvResults
             // 
@@ -245,10 +308,6 @@
             this.dgvResults.AllowUserToDeleteRows = false;
             this.dgvResults.AllowUserToResizeRows = false;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.FileName,
-            this.Size,
-            this.FileDate});
             this.dgvResults.Location = new System.Drawing.Point(16, 15);
             this.dgvResults.MultiSelect = false;
             this.dgvResults.Name = "dgvResults";
@@ -257,30 +316,24 @@
             this.dgvResults.Size = new System.Drawing.Size(738, 408);
             this.dgvResults.TabIndex = 0;
             // 
-            // FileName
+            // btnCancel
             // 
-            this.FileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FileName.HeaderText = "Файл";
-            this.FileName.Name = "FileName";
-            this.FileName.ReadOnly = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(604, 521);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // Size
+            // btnOK
             // 
-            this.Size.HeaderText = "Размер";
-            this.Size.Name = "Size";
-            this.Size.ReadOnly = true;
-            // 
-            // FileDate
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Format = "d";
-            dataGridViewCellStyle1.NullValue = null;
-            this.FileDate.DefaultCellStyle = dataGridViewCellStyle1;
-            this.FileDate.HeaderText = "Дата";
-            this.FileDate.Name = "FileDate";
-            this.FileDate.ReadOnly = true;
-            this.FileDate.ToolTipText = "Дата изменения файла, а НЕ расчётный день XML!";
-            this.FileDate.Width = 120;
+            this.btnOK.Location = new System.Drawing.Point(685, 521);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.TabIndex = 2;
+            this.btnOK.Text = "ОК";
+            this.btnOK.UseVisualStyleBackColor = true;
             // 
             // contextMenuStrip1
             // 
@@ -309,92 +362,6 @@
             this.menuDelete.Size = new System.Drawing.Size(128, 22);
             this.menuDelete.Text = "Удалить";
             // 
-            // dgvCodes
-            // 
-            this.dgvCodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Code,
-            this.Title});
-            this.dgvCodes.Location = new System.Drawing.Point(9, 40);
-            this.dgvCodes.MultiSelect = false;
-            this.dgvCodes.Name = "dgvCodes";
-            this.dgvCodes.RowHeadersVisible = false;
-            this.dgvCodes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCodes.Size = new System.Drawing.Size(377, 431);
-            this.dgvCodes.TabIndex = 14;
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "Код XML";
-            this.Code.Name = "Code";
-            // 
-            // Title
-            // 
-            this.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Title.HeaderText = "Смежник";
-            this.Title.Name = "Title";
-            // 
-            // btnToProcess
-            // 
-            this.btnToProcess.Location = new System.Drawing.Point(625, 429);
-            this.btnToProcess.Name = "btnToProcess";
-            this.btnToProcess.Size = new System.Drawing.Size(129, 42);
-            this.btnToProcess.TabIndex = 1;
-            this.btnToProcess.Text = "На конвейер";
-            this.btnToProcess.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 429);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Найдено файлов:";
-            // 
-            // txtFound
-            // 
-            this.txtFound.BackColor = System.Drawing.SystemColors.Control;
-            this.txtFound.Location = new System.Drawing.Point(133, 426);
-            this.txtFound.Name = "txtFound";
-            this.txtFound.Size = new System.Drawing.Size(69, 20);
-            this.txtFound.TabIndex = 3;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 454);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(102, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Выделено файлов:";
-            // 
-            // txtSelected
-            // 
-            this.txtSelected.BackColor = System.Drawing.SystemColors.Control;
-            this.txtSelected.Location = new System.Drawing.Point(133, 451);
-            this.txtSelected.Name = "txtSelected";
-            this.txtSelected.Size = new System.Drawing.Size(69, 20);
-            this.txtSelected.TabIndex = 5;
-            // 
-            // btnDeselect
-            // 
-            this.btnDeselect.Location = new System.Drawing.Point(208, 449);
-            this.btnDeselect.Name = "btnDeselect";
-            this.btnDeselect.Size = new System.Drawing.Size(162, 23);
-            this.btnDeselect.TabIndex = 6;
-            this.btnDeselect.Text = "Снять выделение";
-            this.btnDeselect.UseVisualStyleBackColor = true;
-            // 
-            // btnToCheck
-            // 
-            this.btnToCheck.Location = new System.Drawing.Point(490, 429);
-            this.btnToCheck.Name = "btnToCheck";
-            this.btnToCheck.Size = new System.Drawing.Size(129, 42);
-            this.btnToCheck.TabIndex = 7;
-            this.btnToCheck.Text = "На проверку";
-            this.btnToCheck.UseVisualStyleBackColor = true;
-            // 
             // formFind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,13 +381,13 @@
             this.tabControl1.ResumeLayout(false);
             this.tabSearch.ResumeLayout(false);
             this.tabSearch.PerformLayout();
-            this.tabResults.ResumeLayout(false);
-            this.tabResults.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCodes)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabResults.ResumeLayout(false);
+            this.tabResults.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCodes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -444,9 +411,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvResults;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileDate;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuAdd;
         private System.Windows.Forms.ToolStripMenuItem menuEdit;

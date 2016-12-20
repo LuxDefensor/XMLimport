@@ -13,6 +13,9 @@ namespace XMLimport
 {
     public partial class formFind : Form
     {
+
+        // TODO: Рассмотреть возможность замены двух кнопок ОК и Отмена на одну Закрыть
+        // TODO: Сделать контекстное меню на результатах, чтобы можно было найденную xml-ку открыть в блокноте или IE
         private Settings s;
         private string fileName = "XMLCodes.lst";
         private List<string> lines;
@@ -123,8 +126,6 @@ namespace XMLimport
 
         private void ReadCodes()
         {
-            string left, right;
-            string[] split;
             if (File.Exists(fileName))
             {
                 dgvCodes.Rows.Clear();
