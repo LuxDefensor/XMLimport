@@ -12,10 +12,7 @@ using System.Text.RegularExpressions;
 namespace XMLimport
 {
     public partial class formFind : Form
-    {
-
-        // TODO: Рассмотреть возможность замены двух кнопок ОК и Отмена на одну Закрыть
-        // TODO: Сделать контекстное меню на результатах, чтобы можно было найденную xml-ку открыть в блокноте или IE
+    {        
         private Settings s;
         private string fileName = "XMLCodes.lst";
         private List<string> lines;
@@ -33,6 +30,24 @@ namespace XMLimport
             btnToProcess.Click += BtnToProcess_Click;
             btnToCheck.Click += BtnToCheck_Click;
             dgvResults.SelectionChanged += DgvResults_SelectionChanged;
+            menuOpenInNotepad.Click += MenuOpenInNotepad_Click;
+            menuOpenInIE.Click += MenuOpenInIE_Click;
+            menuToProcess.Click += BtnToProcess_Click;
+            menuToCheck.Click += BtnToCheck_Click;
+        }
+
+        private void MenuOpenInIE_Click(object sender, EventArgs e)
+        {
+            if (dgvResults.SelectedRows.Count == 1)
+                System.Diagnostics.Process.Start("iexplore",
+                    Path.Combine(txtArchive.Text, dgvResults.SelectedRows[0].Cells[0].Value.ToString()));
+        }
+
+        private void MenuOpenInNotepad_Click(object sender, EventArgs e)
+        {            
+            if (dgvResults.SelectedRows.Count == 1)
+                System.Diagnostics.Process.Start("notepad",
+                    Path.Combine(txtArchive.Text, dgvResults.SelectedRows[0].Cells[0].Value.ToString()));
         }
 
         private void BtnOK_Click(object sender, EventArgs e)
@@ -121,6 +136,10 @@ namespace XMLimport
         {
             txtArchive.Text = s.ArchiveFolder;
             txtArchive.Enabled = false;
+            foreach (DataGridViewColumn col in dgvResults.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
             ReadCodes(); 
         }
 

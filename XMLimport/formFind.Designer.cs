@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabSearch = new System.Windows.Forms.TabPage();
             this.dgvCodes = new System.Windows.Forms.DataGridView();
@@ -54,12 +55,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnToProcess = new System.Windows.Forms.Button();
             this.dgvResults = new System.Windows.Forms.DataGridView();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuToProcess = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenInNotepad = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenInIE = new System.Windows.Forms.ToolStripMenuItem();
+            this.colFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuToCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
             this.tabSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodes)).BeginInit();
@@ -130,7 +136,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.btnFind);
-            this.panel1.Location = new System.Drawing.Point(395, 223);
+            this.panel1.Location = new System.Drawing.Point(395, 182);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(364, 61);
             this.panel1.TabIndex = 13;
@@ -174,7 +180,7 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(392, 146);
+            this.label6.Location = new System.Drawing.Point(392, 121);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(323, 34);
             this.label6.TabIndex = 12;
@@ -183,14 +189,14 @@
             // 
             // txtArchive
             // 
-            this.txtArchive.Location = new System.Drawing.Point(392, 123);
+            this.txtArchive.Location = new System.Drawing.Point(392, 96);
             this.txtArchive.Name = "txtArchive";
             this.txtArchive.Size = new System.Drawing.Size(367, 20);
             this.txtArchive.TabIndex = 11;
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(392, 86);
+            this.label5.Location = new System.Drawing.Point(392, 61);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(308, 34);
             this.label5.TabIndex = 10;
@@ -198,7 +204,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(527, 40);
+            this.btnSave.Location = new System.Drawing.Point(322, 9);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(129, 23);
             this.btnSave.TabIndex = 3;
@@ -207,7 +213,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(392, 40);
+            this.btnLoad.Location = new System.Drawing.Point(187, 9);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(129, 23);
             this.btnLoad.TabIndex = 2;
@@ -308,6 +314,11 @@
             this.dgvResults.AllowUserToDeleteRows = false;
             this.dgvResults.AllowUserToResizeRows = false;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colFileName,
+            this.colFileSize,
+            this.colDate});
+            this.dgvResults.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvResults.Location = new System.Drawing.Point(16, 15);
             this.dgvResults.MultiSelect = false;
             this.dgvResults.Name = "dgvResults";
@@ -316,61 +327,93 @@
             this.dgvResults.Size = new System.Drawing.Size(738, 408);
             this.dgvResults.TabIndex = 0;
             // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(604, 521);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            // 
             // btnOK
             // 
             this.btnOK.Location = new System.Drawing.Point(685, 521);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 2;
-            this.btnOK.Text = "ОК";
+            this.btnOK.Text = "Закрыть";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuAdd,
-            this.menuEdit,
-            this.menuDelete});
+            this.menuOpenInNotepad,
+            this.menuOpenInIE,
+            this.toolStripSeparator1,
+            this.menuToCheck,
+            this.toolStripSeparator2,
+            this.menuToProcess});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(129, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 126);
             // 
-            // menuAdd
+            // menuToProcess
             // 
-            this.menuAdd.Name = "menuAdd";
-            this.menuAdd.Size = new System.Drawing.Size(128, 22);
-            this.menuAdd.Text = "Добавить";
+            this.menuToProcess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.menuToProcess.Name = "menuToProcess";
+            this.menuToProcess.Size = new System.Drawing.Size(185, 22);
+            this.menuToProcess.Text = "На конвейер";
             // 
-            // menuEdit
+            // menuOpenInNotepad
             // 
-            this.menuEdit.Name = "menuEdit";
-            this.menuEdit.Size = new System.Drawing.Size(128, 22);
-            this.menuEdit.Text = "Изменить";
+            this.menuOpenInNotepad.Name = "menuOpenInNotepad";
+            this.menuOpenInNotepad.Size = new System.Drawing.Size(185, 22);
+            this.menuOpenInNotepad.Text = "Открыть в блокноте";
             // 
-            // menuDelete
+            // menuOpenInIE
             // 
-            this.menuDelete.Name = "menuDelete";
-            this.menuDelete.Size = new System.Drawing.Size(128, 22);
-            this.menuDelete.Text = "Удалить";
+            this.menuOpenInIE.Name = "menuOpenInIE";
+            this.menuOpenInIE.Size = new System.Drawing.Size(185, 22);
+            this.menuOpenInIE.Text = "Открыть в IE";
+            // 
+            // colFileName
+            // 
+            this.colFileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colFileName.HeaderText = "Имя файла";
+            this.colFileName.Name = "colFileName";
+            this.colFileName.ReadOnly = true;
+            // 
+            // colFileSize
+            // 
+            this.colFileSize.HeaderText = "Размер";
+            this.colFileSize.Name = "colFileSize";
+            this.colFileSize.ReadOnly = true;
+            this.colFileSize.Width = 80;
+            // 
+            // colDate
+            // 
+            dataGridViewCellStyle1.Format = "G";
+            dataGridViewCellStyle1.NullValue = null;
+            this.colDate.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colDate.HeaderText = "Изменен";
+            this.colDate.Name = "colDate";
+            this.colDate.ReadOnly = true;
+            this.colDate.Width = 120;
+            // 
+            // menuToCheck
+            // 
+            this.menuToCheck.Name = "menuToCheck";
+            this.menuToCheck.Size = new System.Drawing.Size(185, 22);
+            this.menuToCheck.Text = "Проверить";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
             // 
             // formFind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(794, 556);
             this.ControlBox = false;
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "formFind";
@@ -397,7 +440,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabSearch;
         private System.Windows.Forms.TabPage tabResults;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtArchive;
@@ -412,9 +454,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvResults;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem menuAdd;
-        private System.Windows.Forms.ToolStripMenuItem menuEdit;
-        private System.Windows.Forms.ToolStripMenuItem menuDelete;
+        private System.Windows.Forms.ToolStripMenuItem menuToProcess;
+        private System.Windows.Forms.ToolStripMenuItem menuOpenInNotepad;
+        private System.Windows.Forms.ToolStripMenuItem menuOpenInIE;
         private System.Windows.Forms.DataGridView dgvCodes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
@@ -425,5 +467,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnToProcess;
         private System.Windows.Forms.Button btnToCheck;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFileSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuToCheck;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
