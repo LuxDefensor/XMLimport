@@ -1,6 +1,6 @@
 ﻿namespace XMLimport
 {
-    partial class formInput
+    partial class formSelect
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtInput = new System.Windows.Forms.TextBox();
+            this.cboOptions = new System.Windows.Forms.ComboBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // txtInput
+            // cboOptions
             // 
-            this.txtInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cboOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInput.Location = new System.Drawing.Point(12, 12);
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(374, 20);
-            this.txtInput.TabIndex = 0;
+            this.cboOptions.FormattingEnabled = true;
+            this.cboOptions.Location = new System.Drawing.Point(12, 12);
+            this.cboOptions.Name = "cboOptions";
+            this.cboOptions.Size = new System.Drawing.Size(380, 21);
+            this.cboOptions.TabIndex = 0;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(230, 38);
+            this.btnCancel.Location = new System.Drawing.Point(236, 39);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -57,39 +58,38 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(311, 38);
+            this.btnOK.Location = new System.Drawing.Point(317, 39);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "ОК";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // formInput
+            // formSelect
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(398, 75);
+            this.ClientSize = new System.Drawing.Size(404, 72);
             this.ControlBox = false;
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.txtInput);
+            this.Controls.Add(this.cboOptions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "formInput";
+            this.Name = "formSelect";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Введите значение";
+            this.Text = "Выберите значение";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtInput;
+        private System.Windows.Forms.ComboBox cboOptions;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
     }

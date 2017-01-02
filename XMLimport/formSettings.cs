@@ -33,6 +33,7 @@ namespace XMLimport
             btnInbox.Click += PickFolder;
             btnArchive.Click += PickFolder;
             btnArchiver.Click += BtnArchiver_Click;
+            btnExportFolder.Click += PickFolder;
             #endregion
         }
 
@@ -57,20 +58,25 @@ namespace XMLimport
             TextBox target;
             string folderPurpose;
             Button button = sender as Button;
-            if (button.Name == "btnInbox")
+            switch (button.Name)
             {
-                target = txtInbox;
-                folderPurpose = "входящих";
-            }
-            else
-            {
-                target = txtArchive;
-                folderPurpose = "архивных";
+                case "btnInbox":
+                    target = txtInbox;
+                    folderPurpose = "Выберите папку для входящих XML";
+                    break;
+                case "btnArchive":
+                    target = txtArchive;
+                    folderPurpose = "Выберите папку для архивных XML";
+                    break;
+                default:
+                    target = txtExportFolder;
+                    folderPurpose = "Выберите папку для задач экспорта";
+                    break;
             }
             dlgFolder = new FolderBrowserDialog();
             dlgFolder.RootFolder = Environment.SpecialFolder.MyComputer;
             dlgFolder.ShowNewFolderButton = true;
-            dlgFolder.Description = string.Format("Выберите папку для {0} XML", folderPurpose);
+            dlgFolder.Description = folderPurpose;
             if (!string.IsNullOrEmpty(target.Text))
                 dlgFolder.SelectedPath = target.Text;
             if (dlgFolder.ShowDialog(this.Owner) == DialogResult.OK)
@@ -87,6 +93,7 @@ namespace XMLimport
                                       txtPassword.Text,
                                       txtInbox.Text,
                                       txtArchive.Text,
+                                      txtExportFolder.Text,
                                       chkAutoStart.Checked,
                                       chkIgnoreStatus.Checked,
                                       chkRewrite.Checked,
@@ -113,6 +120,7 @@ namespace XMLimport
             txtPassword.Text = settings.Password;
             txtInbox.Text = settings.InboxFolder;
             txtArchive.Text = settings.ArchiveFolder;
+            txtExportFolder.Text = settings.ExportFolder;
             chkAutoStart.Checked = settings.RunOnStart;
             chkIgnoreStatus.Checked = settings.IgnoreNonCommercialStatus;
             chkRewrite.Checked = settings.Rewrite;

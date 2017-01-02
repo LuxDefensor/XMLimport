@@ -14,7 +14,7 @@ namespace XMLimport
     public partial class formFind : Form
     {        
         private Settings s;
-        private string fileName = "XMLCodes.lst";
+        private string fileName = Settings.CodesFile;
         private List<string> lines;
 
         public formFind()

@@ -52,6 +52,12 @@
     <Compile Include="formCheck.Designer.cs">
       <DependentUpon>formCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="formExportList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formExportList.Designer.cs">
+      <DependentUpon>formExportList.cs</DependentUpon>
+    </Compile>
     <Compile Include="formFind.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,12 @@
     <Compile Include="formMain.Designer.cs">
       <DependentUpon>formMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="formSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSelect.Designer.cs">
+      <DependentUpon>formSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="formSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +110,9 @@
     <EmbeddedResource Include="formCheck.resx">
       <DependentUpon>formCheck.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formExportList.resx">
+      <DependentUpon>formExportList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formFind.resx">
       <DependentUpon>formFind.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formMain.resx">
       <DependentUpon>formMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSelect.resx">
+      <DependentUpon>formSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formSettings.resx">
       <DependentUpon>formSettings.cs</DependentUpon>
@@ -139,6 +157,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ExportToXLS.lst">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="IgnoreStatus.lst">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

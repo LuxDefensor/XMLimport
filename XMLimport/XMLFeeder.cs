@@ -653,6 +653,7 @@ namespace XMLimport
                                 }
                             }
                             info[10] = "OK"; // Process result
+                            EnsureExport(info[0], info[2], info[4]);
                             lock (main.Logger)
                             {
                                 main.Logger.WriteWorkingLog(info);
@@ -667,6 +668,41 @@ namespace XMLimport
                     }
                 }
                 Thread.Sleep(500);
+            }
+        }
+
+        private void EnsureExport(string fileName, string inn, string day)
+        {
+            string list = string.Empty;
+            try
+            {
+                list = File.ReadAllText(Settings.ExportFile);
+            }
+            catch (Exception ex)
+            {
+                lock (main.Logger)
+                {
+                    main.Logger.WriteError("XMLFeeder.EnsureExport: Ошибка чтения списка для экспорта" +
+                        Environment.NewLine + ex.Message);
+                }
+                return;
+            }
+            if (list.Contains(inn))
+            {
+                try
+                {
+                    File.WriteAllText(Path.Combine(settings.ExportFolder, DateTime.Now.ToString("yyyyMMddHHmmss.work")),
+                        fileName + Environment.NewLine + inn + Environment.NewLine + day);
+                }
+                catch (Exception ex)
+                {
+                    lock (main.Logger)
+                    {
+                        main.Logger.WriteError("XMLFeeder.EnsureExport: Сбой при записи задачи для " + fileName +
+                            Environment.NewLine + ex.Message);
+                    }
+                    return;
+                }
             }
         }
     }

@@ -83,7 +83,14 @@ namespace XMLimport
             menuCheckXML.Click += MenuCheckXML_Click;
             menuFindXML.Click += MenuFindXML_Click;
             menuIgnoreList.Click += MenuIgnoreList_Click;
+            menuExportCodesList.Click += MenuExportCodesList_Click;
             #endregion
+        }
+
+        private void MenuExportCodesList_Click(object sender, EventArgs e)
+        {
+            formExportList frm = new formExportList();
+            frm.ShowDialog(this);
         }
 
         private void MenuFindXML_Click(object sender, EventArgs e)

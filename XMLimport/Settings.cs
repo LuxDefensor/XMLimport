@@ -10,6 +10,8 @@ namespace XMLimport
     {
         private const string fName = "XMLimport.ini";
         private const string ignoreFile = "IgnoreStatus.lst";
+        private static string exportFile = "ExportToXLS.lst";
+        private static string codesFile = "XMLCodes.lst";
         private string server;
         private string database;
         private string userName;
@@ -17,6 +19,7 @@ namespace XMLimport
         private bool runOnStart;
         private string inboxFolder;
         private string archiveFolder;
+        private string exportFolder;
         private bool ignoreNonCommercialStatus;
         private bool rewrite;
         private int storeDepthMonths;
@@ -28,6 +31,22 @@ namespace XMLimport
         private int season;
 
         #region Properties
+
+        public static string CodesFile
+        {
+        get
+            {
+                return codesFile;
+            }
+        }
+
+        public static string ExportFile
+        {
+        get
+            {
+                return exportFile;
+            }
+        }
 
         public string Server
         {
@@ -157,6 +176,14 @@ namespace XMLimport
             }
         }
 
+        public string ExportFolder
+        {
+            get
+            {
+                return exportFolder;
+            }
+        }
+
         #endregion
 
         public Settings()
@@ -184,6 +211,11 @@ namespace XMLimport
                 if (!Directory.Exists(archiveFolder))
                 {
                     throw new Exception("В INI-файле неверно задана папка для архивов XML");
+                }
+                exportFolder = s["ExportFolder"];
+                if (!Directory.Exists(exportFolder))
+                {
+                    throw new Exception("В INI-файле неверно задана папка для задач экспорта");
                 }
                 ignoreNonCommercialStatus = s["IgnoreNonCommercialStatus"] == "1";
                 rewrite = s["Rewrite"] == "1";
@@ -219,9 +251,9 @@ namespace XMLimport
                 }
         }
 
-        public void SaveSettings(string server,string database,string userName,string password,
-            string inbox,string archive, bool autoStart,bool ignoreStatus,bool rewrite,
-            string storeDepth,bool packArchive,string archiver,string maxErrorLogLines)
+        public void SaveSettings(string server, string database, string userName, string password,
+            string inbox, string archive, string exportFolder, bool autoStart, bool ignoreStatus,
+            bool rewrite, string storeDepth, bool packArchive, string archiver, string maxErrorLogLines)
         {
             string[] lines = new string[13];
             this.server = server;
@@ -232,26 +264,28 @@ namespace XMLimport
             lines[2] = "UserName=" + userName;
             this.password = password;
             lines[3] = "Password=" + password;
+            this.runOnStart = autoStart;
+            lines[4] = "RunOnStart" + (autoStart ? "1" : "0");
             this.inboxFolder = inbox;
             lines[5] = "InboxFolder=" + inbox;
             this.archiveFolder = archive;
             lines[6] = "ArchiveFolder=" + archive;
-            this.runOnStart = autoStart;
-            lines[4] = "RunOnStart" + (autoStart ? "1" : "0");
+            this.exportFolder = exportFolder;
+            lines[7] = "ExportFolder=" + exportFolder;
             this.ignoreNonCommercialStatus = ignoreStatus;
-            lines[7] = "IgnoreNonCommercialStatus=" + (ignoreStatus ? "1" : "0");
+            lines[8] = "IgnoreNonCommercialStatus=" + (ignoreStatus ? "1" : "0");
             this.rewrite = rewrite;
-            lines[8] = "Rewrite=" + (rewrite ? "1" : "0");
+            lines[9] = "Rewrite=" + (rewrite ? "1" : "0");
             if (!int.TryParse(storeDepth, out storeDepthMonths))
                 throw new Exception("Неверный параметр: Глубина хранения архивов. Требуется целое число");
-            lines[9] = "StoreDepthMonths=" + storeDepth;
+            lines[10] = "StoreDepthMonths=" + storeDepth;
             this.packArchive = packArchive;
-            lines[10] = "PackArchive=" + packArchive;
+            lines[11] = "PackArchive=" + packArchive;
             this.archiveProgram = archiver;
-            lines[11] = "ArchiveProgram=" + archiver;
+            lines[12] = "ArchiveProgram=" + archiver;
             if (!int.TryParse(maxErrorLogLines, out this.maxErrorLogLines))
                 throw new Exception("Неверный параметр: Максимальный размер журнала ошибок. Требуется целое число");
-            lines[12] = "MaxErrorLogLines=" + maxErrorLogLines;
+            lines[13] = "MaxErrorLogLines=" + maxErrorLogLines;
             File.WriteAllLines(fName, lines);
         }
 

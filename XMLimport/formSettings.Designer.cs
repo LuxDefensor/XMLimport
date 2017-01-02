@@ -29,34 +29,37 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtServer = new System.Windows.Forms.TextBox();
-            this.txtDatabase = new System.Windows.Forms.TextBox();
-            this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtUser = new System.Windows.Forms.TextBox();
+            this.txtDatabase = new System.Windows.Forms.TextBox();
+            this.txtServer = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtInbox = new System.Windows.Forms.TextBox();
-            this.txtArchive = new System.Windows.Forms.TextBox();
-            this.btnInbox = new System.Windows.Forms.Button();
-            this.btnArchive = new System.Windows.Forms.Button();
-            this.chkAutoStart = new System.Windows.Forms.CheckBox();
-            this.chkIgnoreStatus = new System.Windows.Forms.CheckBox();
-            this.chkRewrite = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtStoreDepthMonths = new System.Windows.Forms.TextBox();
-            this.chkPackArchive = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtArchiver = new System.Windows.Forms.TextBox();
-            this.btnArchiver = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
             this.txtMaxErrorLogLines = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnArchiver = new System.Windows.Forms.Button();
+            this.txtArchiver = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.chkPackArchive = new System.Windows.Forms.CheckBox();
+            this.txtStoreDepthMonths = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.chkRewrite = new System.Windows.Forms.CheckBox();
+            this.chkIgnoreStatus = new System.Windows.Forms.CheckBox();
+            this.chkAutoStart = new System.Windows.Forms.CheckBox();
+            this.btnArchive = new System.Windows.Forms.Button();
+            this.btnInbox = new System.Windows.Forms.Button();
+            this.txtArchive = new System.Windows.Forms.TextBox();
+            this.txtInbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnExportFolder = new System.Windows.Forms.Button();
+            this.txtExportFolder = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -78,32 +81,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "База данных";
             // 
-            // label1
+            // txtPassword
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Сервер";
+            this.txtPassword.Location = new System.Drawing.Point(93, 99);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(177, 20);
+            this.txtPassword.TabIndex = 7;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
-            // label2
+            // txtUser
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "База данных";
+            this.txtUser.Location = new System.Drawing.Point(93, 74);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(177, 20);
+            this.txtUser.TabIndex = 6;
             // 
-            // label3
+            // txtDatabase
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Пользователь";
+            this.txtDatabase.Location = new System.Drawing.Point(93, 49);
+            this.txtDatabase.Name = "txtDatabase";
+            this.txtDatabase.Size = new System.Drawing.Size(177, 20);
+            this.txtDatabase.TabIndex = 5;
+            // 
+            // txtServer
+            // 
+            this.txtServer.Location = new System.Drawing.Point(93, 24);
+            this.txtServer.Name = "txtServer";
+            this.txtServer.Size = new System.Drawing.Size(177, 20);
+            this.txtServer.TabIndex = 4;
             // 
             // label4
             // 
@@ -114,37 +119,38 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Пароль";
             // 
-            // txtServer
+            // label3
             // 
-            this.txtServer.Location = new System.Drawing.Point(93, 24);
-            this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(177, 20);
-            this.txtServer.TabIndex = 4;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 77);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Пользователь";
             // 
-            // txtDatabase
+            // label2
             // 
-            this.txtDatabase.Location = new System.Drawing.Point(93, 49);
-            this.txtDatabase.Name = "txtDatabase";
-            this.txtDatabase.Size = new System.Drawing.Size(177, 20);
-            this.txtDatabase.TabIndex = 5;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 52);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "База данных";
             // 
-            // txtUser
+            // label1
             // 
-            this.txtUser.Location = new System.Drawing.Point(93, 74);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(177, 20);
-            this.txtUser.TabIndex = 6;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(93, 99);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(177, 20);
-            this.txtPassword.TabIndex = 7;
-            this.txtPassword.UseSystemPasswordChar = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Сервер";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnExportFolder);
+            this.groupBox2.Controls.Add(this.txtExportFolder);
+            this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.txtMaxErrorLogLines);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.btnArchiver);
@@ -164,52 +170,112 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(12, 148);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(585, 235);
+            this.groupBox2.Size = new System.Drawing.Size(585, 265);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Обработка XML";
             // 
-            // label5
+            // txtMaxErrorLogLines
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 27);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Папка входящих XML";
+            this.txtMaxErrorLogLines.Location = new System.Drawing.Point(265, 231);
+            this.txtMaxErrorLogLines.Name = "txtMaxErrorLogLines";
+            this.txtMaxErrorLogLines.Size = new System.Drawing.Size(77, 20);
+            this.txtMaxErrorLogLines.TabIndex = 17;
             // 
-            // label6
+            // label9
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 54);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(88, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Архивная папка";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 234);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(252, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "Максимальный размер журнала ошибок (строк)";
             // 
-            // txtInbox
+            // btnArchiver
             // 
-            this.txtInbox.Location = new System.Drawing.Point(129, 24);
-            this.txtInbox.Name = "txtInbox";
-            this.txtInbox.Size = new System.Drawing.Size(416, 20);
-            this.txtInbox.TabIndex = 2;
+            this.btnArchiver.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnArchiver.Location = new System.Drawing.Point(551, 202);
+            this.btnArchiver.Name = "btnArchiver";
+            this.btnArchiver.Size = new System.Drawing.Size(28, 23);
+            this.btnArchiver.TabIndex = 15;
+            this.btnArchiver.Text = "...";
+            this.btnArchiver.UseVisualStyleBackColor = true;
             // 
-            // txtArchive
+            // txtArchiver
             // 
-            this.txtArchive.Location = new System.Drawing.Point(129, 52);
-            this.txtArchive.Name = "txtArchive";
-            this.txtArchive.Size = new System.Drawing.Size(416, 20);
-            this.txtArchive.TabIndex = 3;
+            this.txtArchiver.Location = new System.Drawing.Point(129, 204);
+            this.txtArchiver.Name = "txtArchiver";
+            this.txtArchiver.Size = new System.Drawing.Size(416, 20);
+            this.txtArchiver.TabIndex = 14;
             // 
-            // btnInbox
+            // label8
             // 
-            this.btnInbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnInbox.Location = new System.Drawing.Point(551, 22);
-            this.btnInbox.Name = "btnInbox";
-            this.btnInbox.Size = new System.Drawing.Size(28, 23);
-            this.btnInbox.TabIndex = 4;
-            this.btnInbox.Text = "...";
-            this.btnInbox.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(7, 207);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(121, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Программа-архиватор";
+            // 
+            // chkPackArchive
+            // 
+            this.chkPackArchive.AutoSize = true;
+            this.chkPackArchive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkPackArchive.Location = new System.Drawing.Point(410, 145);
+            this.chkPackArchive.Name = "chkPackArchive";
+            this.chkPackArchive.Size = new System.Drawing.Size(135, 17);
+            this.chkPackArchive.TabIndex = 12;
+            this.chkPackArchive.Text = "Упаковывать архивы";
+            this.chkPackArchive.UseVisualStyleBackColor = true;
+            // 
+            // txtStoreDepthMonths
+            // 
+            this.txtStoreDepthMonths.Location = new System.Drawing.Point(452, 113);
+            this.txtStoreDepthMonths.Name = "txtStoreDepthMonths";
+            this.txtStoreDepthMonths.Size = new System.Drawing.Size(93, 20);
+            this.txtStoreDepthMonths.TabIndex = 11;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(272, 116);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(174, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Глубина хранения архивов (мес.)";
+            // 
+            // chkRewrite
+            // 
+            this.chkRewrite.AutoSize = true;
+            this.chkRewrite.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkRewrite.Location = new System.Drawing.Point(6, 176);
+            this.chkRewrite.Name = "chkRewrite";
+            this.chkRewrite.Size = new System.Drawing.Size(243, 17);
+            this.chkRewrite.TabIndex = 9;
+            this.chkRewrite.Text = "Перезаписывать существующие значения";
+            this.chkRewrite.UseVisualStyleBackColor = true;
+            // 
+            // chkIgnoreStatus
+            // 
+            this.chkIgnoreStatus.AutoSize = true;
+            this.chkIgnoreStatus.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkIgnoreStatus.Location = new System.Drawing.Point(6, 145);
+            this.chkIgnoreStatus.Name = "chkIgnoreStatus";
+            this.chkIgnoreStatus.Size = new System.Drawing.Size(134, 17);
+            this.chkIgnoreStatus.TabIndex = 8;
+            this.chkIgnoreStatus.Text = "Игнорировать статус";
+            this.chkIgnoreStatus.UseVisualStyleBackColor = true;
+            // 
+            // chkAutoStart
+            // 
+            this.chkAutoStart.AutoSize = true;
+            this.chkAutoStart.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkAutoStart.Location = new System.Drawing.Point(5, 116);
+            this.chkAutoStart.Name = "chkAutoStart";
+            this.chkAutoStart.Size = new System.Drawing.Size(204, 17);
+            this.chkAutoStart.TabIndex = 7;
+            this.chkAutoStart.Text = "Запускать процесс автоматически";
+            this.chkAutoStart.UseVisualStyleBackColor = true;
             // 
             // btnArchive
             // 
@@ -221,112 +287,53 @@
             this.btnArchive.Text = "...";
             this.btnArchive.UseVisualStyleBackColor = true;
             // 
-            // chkAutoStart
+            // btnInbox
             // 
-            this.chkAutoStart.AutoSize = true;
-            this.chkAutoStart.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkAutoStart.Location = new System.Drawing.Point(5, 83);
-            this.chkAutoStart.Name = "chkAutoStart";
-            this.chkAutoStart.Size = new System.Drawing.Size(204, 17);
-            this.chkAutoStart.TabIndex = 7;
-            this.chkAutoStart.Text = "Запускать процесс автоматически";
-            this.chkAutoStart.UseVisualStyleBackColor = true;
+            this.btnInbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnInbox.Location = new System.Drawing.Point(551, 22);
+            this.btnInbox.Name = "btnInbox";
+            this.btnInbox.Size = new System.Drawing.Size(28, 23);
+            this.btnInbox.TabIndex = 4;
+            this.btnInbox.Text = "...";
+            this.btnInbox.UseVisualStyleBackColor = true;
             // 
-            // chkIgnoreStatus
+            // txtArchive
             // 
-            this.chkIgnoreStatus.AutoSize = true;
-            this.chkIgnoreStatus.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkIgnoreStatus.Location = new System.Drawing.Point(6, 112);
-            this.chkIgnoreStatus.Name = "chkIgnoreStatus";
-            this.chkIgnoreStatus.Size = new System.Drawing.Size(134, 17);
-            this.chkIgnoreStatus.TabIndex = 8;
-            this.chkIgnoreStatus.Text = "Игнорировать статус";
-            this.chkIgnoreStatus.UseVisualStyleBackColor = true;
+            this.txtArchive.Location = new System.Drawing.Point(129, 52);
+            this.txtArchive.Name = "txtArchive";
+            this.txtArchive.Size = new System.Drawing.Size(416, 20);
+            this.txtArchive.TabIndex = 3;
             // 
-            // chkRewrite
+            // txtInbox
             // 
-            this.chkRewrite.AutoSize = true;
-            this.chkRewrite.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkRewrite.Location = new System.Drawing.Point(6, 143);
-            this.chkRewrite.Name = "chkRewrite";
-            this.chkRewrite.Size = new System.Drawing.Size(243, 17);
-            this.chkRewrite.TabIndex = 9;
-            this.chkRewrite.Text = "Перезаписывать существующие значения";
-            this.chkRewrite.UseVisualStyleBackColor = true;
+            this.txtInbox.Location = new System.Drawing.Point(129, 24);
+            this.txtInbox.Name = "txtInbox";
+            this.txtInbox.Size = new System.Drawing.Size(416, 20);
+            this.txtInbox.TabIndex = 2;
             // 
-            // label7
+            // label6
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(272, 83);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(174, 13);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Глубина хранения архивов (мес.)";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 54);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(88, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Архивная папка";
             // 
-            // txtStoreDepthMonths
+            // label5
             // 
-            this.txtStoreDepthMonths.Location = new System.Drawing.Point(452, 80);
-            this.txtStoreDepthMonths.Name = "txtStoreDepthMonths";
-            this.txtStoreDepthMonths.Size = new System.Drawing.Size(93, 20);
-            this.txtStoreDepthMonths.TabIndex = 11;
-            // 
-            // chkPackArchive
-            // 
-            this.chkPackArchive.AutoSize = true;
-            this.chkPackArchive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkPackArchive.Location = new System.Drawing.Point(410, 112);
-            this.chkPackArchive.Name = "chkPackArchive";
-            this.chkPackArchive.Size = new System.Drawing.Size(135, 17);
-            this.chkPackArchive.TabIndex = 12;
-            this.chkPackArchive.Text = "Упаковывать архивы";
-            this.chkPackArchive.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 174);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(121, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Программа-архиватор";
-            // 
-            // txtArchiver
-            // 
-            this.txtArchiver.Location = new System.Drawing.Point(129, 171);
-            this.txtArchiver.Name = "txtArchiver";
-            this.txtArchiver.Size = new System.Drawing.Size(416, 20);
-            this.txtArchiver.TabIndex = 14;
-            // 
-            // btnArchiver
-            // 
-            this.btnArchiver.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnArchiver.Location = new System.Drawing.Point(551, 169);
-            this.btnArchiver.Name = "btnArchiver";
-            this.btnArchiver.Size = new System.Drawing.Size(28, 23);
-            this.btnArchiver.TabIndex = 15;
-            this.btnArchiver.Text = "...";
-            this.btnArchiver.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 201);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(252, 13);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "Максимальный размер журнала ошибок (строк)";
-            // 
-            // txtMaxErrorLogLines
-            // 
-            this.txtMaxErrorLogLines.Location = new System.Drawing.Point(265, 198);
-            this.txtMaxErrorLogLines.Name = "txtMaxErrorLogLines";
-            this.txtMaxErrorLogLines.Size = new System.Drawing.Size(77, 20);
-            this.txtMaxErrorLogLines.TabIndex = 17;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 27);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(116, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Папка входящих XML";
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(441, 417);
+            this.btnCancel.Location = new System.Drawing.Point(441, 447);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -335,20 +342,47 @@
             // 
             // btnOK
             // 
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(522, 417);
+            this.btnOK.Location = new System.Drawing.Point(522, 447);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 3;
             this.btnOK.Text = "ОК";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
+            // btnExportFolder
+            // 
+            this.btnExportFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnExportFolder.Location = new System.Drawing.Point(551, 76);
+            this.btnExportFolder.Name = "btnExportFolder";
+            this.btnExportFolder.Size = new System.Drawing.Size(28, 23);
+            this.btnExportFolder.TabIndex = 20;
+            this.btnExportFolder.Text = "...";
+            this.btnExportFolder.UseVisualStyleBackColor = true;
+            // 
+            // txtExportFolder
+            // 
+            this.txtExportFolder.Location = new System.Drawing.Point(129, 78);
+            this.txtExportFolder.Name = "txtExportFolder";
+            this.txtExportFolder.Size = new System.Drawing.Size(416, 20);
+            this.txtExportFolder.TabIndex = 19;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 78);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 13);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "Папка экспорта";
+            // 
             // formSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(610, 452);
+            this.ClientSize = new System.Drawing.Size(610, 483);
             this.ControlBox = false;
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
@@ -400,5 +434,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnExportFolder;
+        private System.Windows.Forms.TextBox txtExportFolder;
+        private System.Windows.Forms.Label label10;
     }
 }
