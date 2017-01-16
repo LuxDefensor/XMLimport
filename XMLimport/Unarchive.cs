@@ -21,7 +21,7 @@ namespace XMLimport
         {
             main = mainForm;
             inbox = inboxFolder;
-            filterRAR = @"\w+.rar$|\w+.zip$";
+            filterRAR = @"\w+.rar$";
             filterZIP = @"\w+.zip$";
         }
 
@@ -46,7 +46,7 @@ namespace XMLimport
                         {
                             try
                             {
-                                Extract(f, Path.Combine(appFolder, "rar.exe"), "e -y " + f);
+                                Extract(f, Path.Combine(appFolder, "rar.exe"), "e -y " + Path.Combine(inbox, f));
                             }
                             catch (Exception ex)
                             {
@@ -62,7 +62,7 @@ namespace XMLimport
                         {
                             try
                             {
-                                Extract(f, Path.Combine(appFolder, "unzip.exe"), "-q " + f);
+                                Extract(f, Path.Combine(appFolder, "unzip.exe"), "-q " + Path.Combine(inbox, f));
                             }
                             catch (Exception ex)
                             {
@@ -93,6 +93,10 @@ namespace XMLimport
             {
                 Thread.Sleep(500);
                 File.Delete(fileName);
+            }
+            else
+            {
+                throw new Exception("Ошибка распаковки архива: " + command + " " + args);
             }
         }
     }

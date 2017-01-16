@@ -11,10 +11,13 @@ namespace XMLimport
 {
     public partial class formTest: Form
     {
+        List<CheckBox> list;
         public formTest()
         {
             InitializeComponent();
+
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

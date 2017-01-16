@@ -21,7 +21,7 @@ namespace XMLimport
             if (!File.Exists(errorLogPath))
                 File.Create(errorLogPath);
             today = DateTime.Today.Date;
-            currentWorkingLog = workingLogPrefix + today.Year + today.Month + "01.csv";
+            currentWorkingLog = workingLogPrefix + today.Year + today.Month.ToString("00") + "01.csv";
             if (!File.Exists(currentWorkingLog))
             {
                 var f = File.Create(currentWorkingLog);
@@ -63,7 +63,7 @@ namespace XMLimport
         get
             {
                 string[] lines = File.ReadAllLines(currentWorkingLog);
-                return string.Join(Environment.NewLine, lines.Reverse()).Replace(";"," - ");
+                return string.Join(Environment.NewLine, lines.Reverse()).Replace(";","\t");
             }
         }
 

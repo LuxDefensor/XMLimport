@@ -120,7 +120,7 @@ namespace XMLimport
             txtPassword.Text = settings.Password;
             txtInbox.Text = settings.InboxFolder;
             txtArchive.Text = settings.ArchiveFolder;
-            txtExportFolder.Text = settings.ExportFolder;
+            txtExportFolder.Text = settings.ExportProgram;
             chkAutoStart.Checked = settings.RunOnStart;
             chkIgnoreStatus.Checked = settings.IgnoreNonCommercialStatus;
             chkRewrite.Checked = settings.Rewrite;

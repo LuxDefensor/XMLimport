@@ -19,7 +19,7 @@ namespace XMLimport
         private bool runOnStart;
         private string inboxFolder;
         private string archiveFolder;
-        private string exportFolder;
+        private string exportProgram;
         private bool ignoreNonCommercialStatus;
         private bool rewrite;
         private int storeDepthMonths;
@@ -176,11 +176,11 @@ namespace XMLimport
             }
         }
 
-        public string ExportFolder
+        public string ExportProgram
         {
             get
             {
-                return exportFolder;
+                return exportProgram;
             }
         }
 
@@ -212,10 +212,10 @@ namespace XMLimport
                 {
                     throw new Exception("В INI-файле неверно задана папка для архивов XML");
                 }
-                exportFolder = s["ExportFolder"];
-                if (!Directory.Exists(exportFolder))
+                exportProgram = s["ExportProgram"];
+                if (!File.Exists(exportProgram))
                 {
-                    throw new Exception("В INI-файле неверно задана папка для задач экспорта");
+                    throw new Exception("В INI-файле неверно задана программа для экспорта");
                 }
                 ignoreNonCommercialStatus = s["IgnoreNonCommercialStatus"] == "1";
                 rewrite = s["Rewrite"] == "1";
@@ -270,7 +270,7 @@ namespace XMLimport
             lines[5] = "InboxFolder=" + inbox;
             this.archiveFolder = archive;
             lines[6] = "ArchiveFolder=" + archive;
-            this.exportFolder = exportFolder;
+            this.exportProgram = exportFolder;
             lines[7] = "ExportFolder=" + exportFolder;
             this.ignoreNonCommercialStatus = ignoreStatus;
             lines[8] = "IgnoreNonCommercialStatus=" + (ignoreStatus ? "1" : "0");
