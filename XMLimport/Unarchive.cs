@@ -21,8 +21,9 @@ namespace XMLimport
         {
             main = mainForm;
             inbox = inboxFolder;
-            filterRAR = @"\w+.rar$";
-            filterZIP = @"\w+.zip$";
+            filterRAR = @"\w+.rar$|\w+.zip$";
+            //filterZIP = @"\w+.zip$";
+            filterZIP = "don't match";
         }
 
         public void EndProcess()
