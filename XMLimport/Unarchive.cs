@@ -34,8 +34,8 @@ namespace XMLimport
         public void StartProcess()
         {
             isRunning = true;
-            Regex regexZIP = new Regex(filterZIP);
-            Regex regexRAR = new Regex(filterRAR);
+            //Regex regexZIP = new Regex(filterZIP);
+            Regex detect = new Regex(filterRAR);
             Process p;
             while (isRunning)
             {
@@ -43,27 +43,20 @@ namespace XMLimport
                 {
                     foreach (string f in Directory.GetFiles(inbox))
                     {
-                        if (regexRAR.IsMatch(f))
+                        if (detect.IsMatch(f))
                         {
                             try
                             {
-                                Extract(f, Path.Combine(appFolder, "rar.exe"), "e -y " + Path.Combine(inbox, f));
-                            }
-                            catch (Exception ex)
-                            {
-                                lock (main.Logger)
-                                {
-                                    main.Logger.WriteError("Не удалось распаковать " + f + ": " + ex.Message);
-                                }
-                                File.Move(f, f + "_error"); // I deliberately cling it after the extension so that 
-                                                            // program ingore it from now on until a human takes care of the file
-                            }
-                        }
-                        else if (regexZIP.IsMatch(f))
-                        {
-                            try
-                            {
-                                Extract(f, Path.Combine(appFolder, "unzip.exe"), "-q " + Path.Combine(inbox, f));
+                                if (!Extract(f, Path.Combine(appFolder, "rar.exe"), "e -y " + Path.Combine(inbox, f)))
+                                    if (!Extract(f, Path.Combine(appFolder, "unzip.exe"), "-q " + Path.Combine(inbox, f)))
+                                    {
+                                        lock (main.Logger)
+                                        {
+                                            main.Logger.WriteError("Не удалось распаковать " + f + ": распаковщик вернул ненулевой код");
+                                        }
+                                        File.Move(f, f + "_error"); // I deliberately cling it after the extension so that 
+                                                                    // program ingore it from now on until a human takes care of the file
+                                    }
                             }
                             catch (Exception ex)
                             {
@@ -82,7 +75,7 @@ namespace XMLimport
 
         }
 
-        private void Extract(string fileName, string command, string args)
+        private bool Extract(string fileName, string command, string args)
         {
             Process p;
             p = new Process();            
@@ -94,10 +87,11 @@ namespace XMLimport
             {
                 Thread.Sleep(500);
                 File.Delete(fileName);
+                return true;
             }
             else
             {
-                throw new Exception("Ошибка распаковки архива: " + command + " " + args);
+                return false;
             }
         }
     }
