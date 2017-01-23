@@ -274,7 +274,7 @@ namespace XMLimport
             txtBeginning.Text = currentInfo[8];
             txtPointsCount.Text = currentInfo[5];
             txtValuesCount.Text = currentInfo[6];
-            txtCompleted.Text = currentInfo[7];
+            txtCompleted.Text = (int.Parse(currentInfo[7]) - 1).ToString();
             txtStatus.Text = currentInfo[10];
         }
 

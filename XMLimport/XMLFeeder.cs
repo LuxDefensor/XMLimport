@@ -157,7 +157,7 @@ namespace XMLimport
                                         }
                                     }
                                 }
-                                info[7] = (completed - 1).ToString(); // Count of processed values
+                                info[7] = completed.ToString(); // Count of processed values
                                 m.WriteAllFromTemp(rewrite);
                                 info[9] = DateTime.Now.ToString("HH:mm"); // Process ending time     
                                 main.CurrentInfo = info;
