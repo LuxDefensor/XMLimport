@@ -53,10 +53,11 @@ namespace XMLimport
         public void WriteWorkingLog(string[] info)
         {
             // BUG: Если открыть этот лог в Excel, появляется проблема с кодировкой
-            StreamWriter writer = File.AppendText(currentWorkingLog);
+            StreamWriter writer = File.AppendText(currentWorkingLog);                        
             writer.WriteLine(string.Join(";", info));
             writer.Close();
         }
+        
 
         public string WorkingLog
         {
@@ -67,5 +68,39 @@ namespace XMLimport
             }
         }
 
+        public string[] WorkingLogLines
+        {
+        get
+            {
+                string[] lines = File.ReadAllLines(currentWorkingLog);
+                return lines;
+            }
+        }
+
+        public string ErrorLog
+        {
+            get
+            {
+                string[] lines = File.ReadAllLines(errorLogPath);
+                return string.Join(Environment.NewLine, lines.Reverse()).Replace(";", "\t");
+            }
+        }
+
+        public string[] ErrorLogLines
+        {
+            get
+            {
+                string[] lines = File.ReadAllLines(errorLogPath);
+                return lines;
+            }
+        }
+
+        public string LastError
+        {
+            get
+            {
+                return File.ReadAllLines(errorLogPath).Last();
+            }
+        }
     }
 }

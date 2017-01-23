@@ -287,5 +287,16 @@ namespace XMLimport
         {
             txtLog.Text = logger.WorkingLog;
         }
+
+        public string[] ThreadsStat()
+        {
+            int threadsCount = 4;
+            string[] result = new string[threadsCount];
+            result[0] = thrFiles.Name + ": " + thrFiles.ThreadState.ToString();
+            result[1] = thrUnarch.Name + ": " + thrUnarch.ThreadState.ToString();
+            result[2] = thrXML.Name + ": " + thrXML.ThreadState.ToString();
+            result[3] = thrArc.Name + ": " + thrArc.ThreadState.ToString();
+            return result;
+        }
     }
 }
