@@ -29,6 +29,12 @@ namespace XMLimport
         private int maxErrorLogLines;
         private bool calculateSeason;
         private int season;
+        private string sMTPServer;
+        private int sMTPPort;
+        private string sMTPUserName;
+        private string sMTPPassword;
+        private bool useSSL;
+        private string addressFrom;
 
         #region Properties
 
@@ -184,6 +190,54 @@ namespace XMLimport
             }
         }
 
+        public string SMTPServer
+        {
+            get
+            {
+                return sMTPServer;
+            }
+        }
+
+        public int SMTPPort
+        {
+            get
+            {
+                return sMTPPort;
+            }
+        }
+
+        public string SMTPUserName
+        {
+            get
+            {
+                return sMTPUserName;
+            }
+        }
+
+        public string SMTPPassword
+        {
+            get
+            {
+                return sMTPPassword;
+            }
+        }
+
+        public bool UseSSL
+        {
+            get
+            {
+                return useSSL;
+            }
+        }
+
+        public string AddressFrom
+        {
+            get
+            {
+                return addressFrom;
+            }
+        }
+
         #endregion
 
         public Settings()
@@ -233,6 +287,13 @@ namespace XMLimport
                     if (!int.TryParse(s["Season"], out season))
                         throw new Exception("Неверный флрмат параметра Season в INI-файле");
                 }
+                sMTPServer = s["SMTPServer"];
+                if (!int.TryParse(s["SMTPPort"], out sMTPPort))
+                    throw new Exception("Неверный формат параметра SMTPPort в INI-файле");
+                sMTPUserName = s["SMTPUserName"];
+                sMTPPassword = s["SMTPPassword"];
+                useSSL = s["UseSSL"] == "1";
+                addressFrom = s["AddressFrom"];
             }
             catch (Exception ex)
             {
