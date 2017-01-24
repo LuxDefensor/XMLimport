@@ -1,0 +1,10 @@
+﻿<request>
+	<address>lux_defensor@mail.ru</address>
+	<job name="IsRunning" description="Статус программы Импорт XML"/>
+	<job name="Threads" description="Состояние потоков"/>
+	<job name="LastResult" description="Последние результаты Импорта XML"/>
+	<job name="LastError" description="Последняя ошибка"/>
+	<job name="InboxFiles" description="Файлы в папке Inbox"/>
+	<job name="Mailbox" description="Состояние почтового ящика" folder="c:\xmlimport\1\fetchmail.log"/>
+	<job name="Scheduler" description="Состояние Планировщика"/>
+</request>

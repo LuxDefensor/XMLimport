@@ -39,6 +39,7 @@
             this.menuService = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIgnoreList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuExportCodesList = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnStart = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +53,7 @@
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.txtXML = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.txtArc = new System.Windows.Forms.ToolStripTextBox();
+            this.txtReport = new System.Windows.Forms.ToolStripTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -76,7 +77,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.menuExportCodesList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -152,6 +152,12 @@
             this.menuIgnoreList.Size = new System.Drawing.Size(225, 22);
             this.menuIgnoreList.Text = "Список исключений";
             // 
+            // menuExportCodesList
+            // 
+            this.menuExportCodesList.Name = "menuExportCodesList";
+            this.menuExportCodesList.Size = new System.Drawing.Size(225, 22);
+            this.menuExportCodesList.Text = "Список кодов для экспорта";
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -184,7 +190,7 @@
             this.toolStripLabel4,
             this.txtXML,
             this.toolStripLabel5,
-            this.txtArc});
+            this.txtReport});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1032, 25);
@@ -262,13 +268,13 @@
             // toolStripLabel5
             // 
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(64, 22);
-            this.toolStripLabel5.Text = "архивация";
+            this.toolStripLabel5.Size = new System.Drawing.Size(75, 22);
+            this.toolStripLabel5.Text = "диагностика";
             // 
-            // txtArc
+            // txtReport
             // 
-            this.txtArc.Name = "txtArc";
-            this.txtArc.Size = new System.Drawing.Size(100, 25);
+            this.txtReport.Name = "txtReport";
+            this.txtReport.Size = new System.Drawing.Size(100, 25);
             // 
             // panel1
             // 
@@ -469,18 +475,13 @@
             this.txtLog.Location = new System.Drawing.Point(3, 178);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
+            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtLog.Size = new System.Drawing.Size(1026, 309);
             this.txtLog.TabIndex = 2;
             // 
             // timer1
             // 
             this.timer1.Interval = 1000;
-            // 
-            // menuExportCodesList
-            // 
-            this.menuExportCodesList.Name = "menuExportCodesList";
-            this.menuExportCodesList.Size = new System.Drawing.Size(225, 22);
-            this.menuExportCodesList.Text = "Список кодов для экспорта";
             // 
             // formMain
             // 
@@ -552,7 +553,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuCheckXML;
         private System.Windows.Forms.ToolStripMenuItem menuFindXML;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.ToolStripTextBox txtArc;
+        private System.Windows.Forms.ToolStripTextBox txtReport;
         private System.Windows.Forms.ToolStripMenuItem menuExportCodesList;
     }
 }

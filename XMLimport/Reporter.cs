@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.Threading;
 
 namespace XMLimport
 {
@@ -33,6 +34,7 @@ namespace XMLimport
         public void StartProcess()
         {
             Regex regex = new Regex(filter);
+            int stringLength = 40;
             XDocument xml;
             isRunning = true;
             StringBuilder report;
@@ -42,8 +44,9 @@ namespace XMLimport
                 {
                     foreach (string f in Directory.GetFiles(s.InboxFolder))
                     {
-                        if (regex.IsMatch(f))
+                        if (regex.IsMatch(Path.GetFileName(f)))
                         {
+                            Thread.Sleep(500);
                             report = new StringBuilder();
                             report.AppendLine("Отчёт о работоспособности компонентов АИИС КУЭ Пирамида 20000");
                             xml = new XDocument();
@@ -58,15 +61,16 @@ namespace XMLimport
                                     main.Logger.WriteError("Ошибка загрузки XML файла request: " +
                                         ex.Message);
                                 }
-                                File.Move(f, Path.Combine(Path.GetDirectoryName(f), 
-                                                          "error_" + Path.GetFileNameWithoutExtension(f), 
+                                File.Move(f, Path.Combine(Path.GetDirectoryName(f),
+                                                          "error_" + Path.GetFileNameWithoutExtension(f) +
                                                           Path.GetExtension(f)));
                                 continue;
                             }
                             foreach (XElement job in xml.Root.Descendants("job"))
                             {
-                                report.AppendLine(new string('=', 40));
+                                report.AppendLine(new string('=', stringLength));
                                 report.AppendLine(new string(' ', 5) + job.Attribute("description").Value);
+                                report.AppendLine(new string('-', stringLength));
                                 report.AppendLine();
                                 switch (job.Attribute("name").Value.ToLower())
                                 {
@@ -94,21 +98,55 @@ namespace XMLimport
                                             logFolder = job.Attribute("folder").Value;
                                         else
                                             logFolder = Environment.CurrentDirectory;
-                                        report.Append(MailboxStatus(logFolder));
+                                        report.AppendLine(MailboxStatus(logFolder));
                                         break;
                                     case "scheduler":
-                                        report.Append(SchedulerStatus());
+                                        report.AppendLine(SchedulerStatus());
                                         break;
                                     default:
                                         report.AppendLine("Неизвестная задача: " + job.Attribute("name").Value);
                                         break;
                                 } //switch (job.Attribute("name").Value.ToLower())
                             } // foreach (XElement job in xml.Root.Descendants("job"))
-                            report.AppendLine(new string('=', 40));
+                            report.AppendLine();
+                            report.AppendLine(new string('=', stringLength));
                             report.AppendLine("Отчёт сформирован автоматически по запросу. Время: " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"));
+                            if (SendMail(report.ToString(), xml.Root.Descendants("address").First().Value))
+                            {
+                                string[] info =
+                                {
+                                    f,
+                                    new FileInfo(f).Length.ToString(),
+                                    "отчёт",
+                                    xml.Root.Descendants("address").First().Value,
+                                    string.Empty,
+                                    xml.Descendants("job").Count().ToString(),
+                                    string.Empty,
+                                    string.Empty,
+                                    string.Empty,
+                                    DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"),
+                                    "OK"
+                                };
+                                lock (main.Logger)
+                                {
+                                    main.Logger.WriteWorkingLog(info);
+                                }
+                                File.Move(f, Path.Combine(s.ArchiveFolder,
+                                                          Path.GetFileNameWithoutExtension(f) + "_arc" +
+                                                          DateTime.Now.ToString("yyyyMMdd_HHmmss") +
+                                                          Path.GetExtension(f)));
+                            }
+                            else
+                            {
+                                File.Move(f, Path.Combine(Path.GetDirectoryName(f),
+                                                          "error_" + Path.GetFileNameWithoutExtension(f) +
+                                                          Path.GetExtension(f)));
+                            }
+
                         } // end of if (regex.IsMatch(f))
                     } // emd of foreach(string f in Directory.GetFiles(s.InboxFolder))
                 } // end of if(main.Process)
+                Thread.Sleep(1000);
             } // end of while(isRunning)
         } // end of the method
 
@@ -118,11 +156,11 @@ namespace XMLimport
         }
 
 
-        private void SendMail(string report, string addressTo)
+        private bool SendMail(string report, string addressTo)
         {
             MailMessage msg = new MailMessage(s.AddressFrom, addressTo,
-                "Отчет о работоспособности компонентов ИВК «Пирамида 2000» от" + DateTime.Now.ToShortDateString(),
-                "report");
+                "Отчет о работоспособности компонентов ИВК «Пирамида 2000» от " + DateTime.Now.ToShortDateString(),
+                report);
             try
             {
                 SmtpClient smtp = new SmtpClient(s.SMTPServer, s.SMTPPort);
@@ -139,8 +177,9 @@ namespace XMLimport
                 {
                     main.Logger.WriteError("Не удалось отправить отчет на " + addressTo + ": " + ex.Message);
                 }
-                return;
+                return false;
             }
+            return true;
         }
 
         #region Report tasks
@@ -210,7 +249,7 @@ namespace XMLimport
         {
             string result;
             System.Diagnostics.Process[] processes =
-                System.Diagnostics.Process.GetProcessesByName("schedule.exe");
+                System.Diagnostics.Process.GetProcessesByName("Schedule.exe");
             switch (processes.Length)
             {
                 case 0:

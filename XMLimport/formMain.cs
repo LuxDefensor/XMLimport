@@ -24,6 +24,7 @@ namespace XMLimport
         private Unarchive unarch;
         private Logger logger;
         private Archiver arc;
+        private Reporter report;
         private string[] currentInfo;
         private int currentProgress;
         private string windowTitle = "Импорт данных из XML";
@@ -32,6 +33,7 @@ namespace XMLimport
         Thread thrFiles;
         Thread thrUnarch;
         Thread thrArc;
+        Thread thrReport;
 
         public object sync = new object();
 
@@ -60,10 +62,12 @@ namespace XMLimport
                 watcher = new FolderWatcher(this, settings.InboxFolder, settings.ArchiveFolder);
                 unarch = new Unarchive(this, settings.InboxFolder);
                 arc = new Archiver(this);
+                report = new Reporter(this);
                 thrXML = new Thread(new ThreadStart(feeder.StartProcess));
                 thrFiles = new Thread(new ThreadStart(watcher.StartProcess));
                 thrUnarch = new Thread(new ThreadStart(unarch.StartProcess));
                 thrArc = new Thread(new ThreadStart(arc.StartProcess));
+                thrReport = new Thread(new ThreadStart(report.StartProcess));
                 currentProgress = 0;
                 currentInfo = new string[] { "", "", "", "", "", "", "", "", "", "", "" };
             }
@@ -125,7 +129,7 @@ namespace XMLimport
             txtWatcherStat.Text = thrFiles.ThreadState.ToString();
             txtUnarchStat.Text = thrUnarch.ThreadState.ToString();
             txtXML.Text = thrXML.ThreadState.ToString();
-            txtArc.Text = thrArc.ThreadState.ToString();
+            txtReport.Text = thrReport.ThreadState.ToString();
             ShowCurrentInfo();
             UpdateProgress();
             UpdateLog();
@@ -143,6 +147,7 @@ namespace XMLimport
             watcher.EndProcess();
             unarch.EndProcess();
             arc.EndProcess();
+            report.EndProcess();
             while ((thrFiles.ThreadState != ThreadState.Stopped &&
                     thrFiles.ThreadState != ThreadState.Unstarted) ||
                    (thrXML.ThreadState != ThreadState.Stopped &&
@@ -150,7 +155,9 @@ namespace XMLimport
                    (thrUnarch.ThreadState != ThreadState.Stopped &&
                     thrUnarch.ThreadState != ThreadState.Unstarted) ||
                    (thrArc.ThreadState != ThreadState.Stopped &&
-                    thrArc.ThreadState != ThreadState.Unstarted))
+                    thrArc.ThreadState != ThreadState.Unstarted) ||
+                    thrReport.ThreadState != ThreadState.Stopped &&
+                    thrReport.ThreadState != ThreadState.Unstarted)
             {
                 Thread.Sleep(500);
             }
@@ -172,8 +179,8 @@ namespace XMLimport
                 thrFiles.Start();
             if (thrUnarch.ThreadState == ThreadState.Stopped || thrUnarch.ThreadState == ThreadState.Unstarted)
                 thrUnarch.Start();
-            if (thrArc.ThreadState == ThreadState.Stopped || thrArc.ThreadState == ThreadState.Unstarted)
-                thrArc.Start();
+            if (thrReport.ThreadState == ThreadState.Stopped || thrReport.ThreadState == ThreadState.Unstarted)
+                thrReport.Start();
         }
 
         public bool Process
@@ -257,7 +264,7 @@ namespace XMLimport
                 Thread.Sleep(500);
                 thrXML.Start();
                 Thread.Sleep(1000);
-                thrArc.Start();
+                thrReport.Start();
             }
             timer1.Enabled = true;
         }
@@ -274,7 +281,10 @@ namespace XMLimport
             txtBeginning.Text = currentInfo[8];
             txtPointsCount.Text = currentInfo[5];
             txtValuesCount.Text = currentInfo[6];
-            txtCompleted.Text = (int.Parse(currentInfo[7]) - 1).ToString();
+            if (string.IsNullOrEmpty(currentInfo[7]))
+                txtCompleted.Text = "0";
+            else
+                txtCompleted.Text = (int.Parse(currentInfo[7]) - 1).ToString();
             txtStatus.Text = currentInfo[10];
         }
 
@@ -292,10 +302,10 @@ namespace XMLimport
         {
             int threadsCount = 4;
             string[] result = new string[threadsCount];
-            result[0] = thrFiles.Name + ": " + thrFiles.ThreadState.ToString();
-            result[1] = thrUnarch.Name + ": " + thrUnarch.ThreadState.ToString();
-            result[2] = thrXML.Name + ": " + thrXML.ThreadState.ToString();
-            result[3] = thrArc.Name + ": " + thrArc.ThreadState.ToString();
+            result[0] = "Файловый: " + thrFiles.ThreadState.ToString();
+            result[1] = "Распаковка: " + thrUnarch.ThreadState.ToString();
+            result[2] = "Обработка XML: " + thrXML.ThreadState.ToString();
+            result[3] = "Самодиагностика: " + thrReport.ThreadState.ToString();
             return result;
         }
     }
