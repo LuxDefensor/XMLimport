@@ -249,10 +249,10 @@ namespace XMLimport
         {
             string result;
             System.Diagnostics.Process[] processes =
-                System.Diagnostics.Process.GetProcessesByName("Schedule.exe");
+                System.Diagnostics.Process.GetProcessesByName("Schedule");
             switch (processes.Length)
             {
-                case 0:
+                case 0:                    
                     result = "Планировщик не запущен";
                     break;
                 case 1:
