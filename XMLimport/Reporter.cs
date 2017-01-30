@@ -56,11 +56,8 @@ namespace XMLimport
                             }
                             catch (Exception ex)
                             {
-                                lock (main.Logger)
-                                {
-                                    main.Logger.WriteError("Ошибка загрузки XML файла request: " +
-                                        ex.Message);
-                                }
+                                main.Logger.WriteError("Ошибка загрузки XML файла request: " +
+                                    ex.Message);
                                 File.Move(f, Path.Combine(Path.GetDirectoryName(f),
                                                           "error_" + Path.GetFileNameWithoutExtension(f) +
                                                           Path.GetExtension(f)));
@@ -127,10 +124,7 @@ namespace XMLimport
                                     DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"),
                                     "OK"
                                 };
-                                lock (main.Logger)
-                                {
-                                    main.Logger.WriteWorkingLog(info);
-                                }
+                                main.Logger.WriteWorkingLog(info);
                                 File.Move(f, Path.Combine(s.ArchiveFolder,
                                                           Path.GetFileNameWithoutExtension(f) + "_arc" +
                                                           DateTime.Now.ToString("yyyyMMdd_HHmmss") +
@@ -173,10 +167,7 @@ namespace XMLimport
             }
             catch (Exception ex)
             {
-                lock (main.Logger)
-                {
-                    main.Logger.WriteError("Не удалось отправить отчет на " + addressTo + ": " + ex.Message);
-                }
+                main.Logger.WriteError("Не удалось отправить отчет на " + addressTo + ": " + ex.Message);
                 return false;
             }
             return true;
@@ -199,10 +190,7 @@ namespace XMLimport
             string[] result = new string[3];
             string[] log;
             string[] currentLine;
-            lock (main.Logger)
-            {
-                log = main.Logger.WorkingLogLines;
-            }
+            log = main.Logger.WorkingLogLines;
             for (int i = 0; i < 3; i++)
             {
                 currentLine = log[log.Length - 1 - i].Split(';');
@@ -215,10 +203,7 @@ namespace XMLimport
         private string LastError()
         {
             string result;
-            lock (main.Logger)
-            {
-                result = main.Logger.LastError;
-            }
+            result = main.Logger.LastError;
             return result;
         }
 

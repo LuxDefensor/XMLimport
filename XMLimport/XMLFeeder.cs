@@ -63,10 +63,7 @@ namespace XMLimport
             {
                 if (main.Process)
                 {
-                    lock (main.XMLs)
-                    {
-                        xmls_copy = new Dictionary<string, XmlDocument>(main.XMLs);
-                    }
+                    xmls_copy = new Dictionary<string, XmlDocument>(main.XMLs);
                     if (xmls_copy.Count > 0)
                     {
                         foreach (KeyValuePair<string, XmlDocument> xml in xmls_copy)
@@ -89,17 +86,11 @@ namespace XMLimport
                             }
                             catch (Exception ex)
                             {
-                                lock (main.Logger)
-                                {
-                                    main.Logger.WriteError("Ошибка прасинга XML: " + info[0] + " " + ex.Message);
-                                    info[10] = "ошибка";
-                                    main.Logger.WriteWorkingLog(info);
-                                }
-                                lock (main.XMLs)
-                                {
-                                    main.XMLs.Remove(xml.Key);
-                                    main.Disposables.Add(xml.Key);
-                                }
+                                main.Logger.WriteError("Ошибка прасинга XML: " + info[0] + " " + ex.Message);
+                                info[10] = "ошибка";
+                                main.Logger.WriteWorkingLog(info);
+                                main.XMLs.Remove(xml.Key);
+                                main.Disposables.Add(xml.Key);
                                 continue;
                             }
                             try
@@ -164,30 +155,18 @@ namespace XMLimport
                             }
                             catch (Exception ex)
                             {
-                                lock (main.Logger)
-                                {
-                                    main.Logger.WriteError("Ошибка обработки xml " + info[0] + ": " + ex.Message +
-                                        Environment.NewLine + ex.InnerException.Message);
-                                }
-                                lock (main.XMLs)
-                                {
-                                    main.XMLs.Remove(xml.Key);
-                                    main.Disposables.Add(xml.Key);
-                                    info[10] = "Ошибка";
-                                    main.Logger.WriteWorkingLog(info);
-                                    continue;
-                                }
-                            }
-                            info[10] = "OK"; // Process result
-                            lock (main.Logger)
-                            {
-                                main.Logger.WriteWorkingLog(info);
-                            }
-                            lock (main.XMLs)
-                            {
+                                main.Logger.WriteError("Ошибка обработки xml " + info[0] + ": " + ex.Message +
+                                                    Environment.NewLine + ex.InnerException.Message);
                                 main.XMLs.Remove(xml.Key);
                                 main.Disposables.Add(xml.Key);
+                                info[10] = "Ошибка";
+                                main.Logger.WriteWorkingLog(info);
+                                continue;
                             }
+                            info[10] = "OK"; // Process result
+                            main.Logger.WriteWorkingLog(info);
+                            main.XMLs.Remove(xml.Key);
+                            main.Disposables.Add(xml.Key);
                             main.CurrentInfo = info;
                             EnsureExport(info);
                         }
@@ -206,11 +185,8 @@ namespace XMLimport
             }
             catch (Exception ex)
             {
-                lock (main.Logger)
-                {
-                    main.Logger.WriteError("XMLFeeder.EnsureExport: Ошибка чтения списка для экспорта" +
-                        Environment.NewLine + ex.Message);
-                }
+                main.Logger.WriteError("XMLFeeder.EnsureExport: Ошибка чтения списка для экспорта" +
+                    Environment.NewLine + ex.Message);
                 return;
             }
             if (list.Contains(info[2]))
@@ -230,19 +206,13 @@ namespace XMLimport
                     {
                         info[9] = DateTime.Now.ToString("HH:mm");
                         info[10] = "Экспорт ОК";
-                        lock (main.Logger)
-                        {
-                            main.Logger.WriteWorkingLog(info);
-                        }
+                        main.Logger.WriteWorkingLog(info);
                     }
                 }
                 catch (Exception ex)
                 {
-                    lock (main.Logger)
-                    {
-                        main.Logger.WriteError("XMLFeeder.EnsureExport: Сбой при запуске задачи для " + info[2] +
-                            Environment.NewLine + ex.Message);
-                    }
+                    main.Logger.WriteError("XMLFeeder.EnsureExport: Сбой при запуске задачи для " + info[2] +
+                        Environment.NewLine + ex.Message);
                     return;
                 }
             }

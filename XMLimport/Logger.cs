@@ -13,6 +13,8 @@ namespace XMLimport
         private string currentWorkingLog;
         private int maxErrorLines;
 
+        private object lockFiles = new object();
+
         public Logger(int maxErrorLines)
         {
             DateTime today;
@@ -32,48 +34,60 @@ namespace XMLimport
 
         public void WriteError(string message)
         {
-            string[] currentLog = File.ReadAllLines(errorLogPath);
-            string[] newLog;
-            if (currentLog.Length >= maxErrorLines)
+            lock (lockFiles)
             {
-                newLog = new string[maxErrorLines];
-                currentLog.CopyTo(newLog, 1);
-                newLog[maxErrorLines - 1] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + message;
+                string[] currentLog = File.ReadAllLines(errorLogPath);
+                string[] newLog;
+                if (currentLog.Length >= maxErrorLines)
+                {
+                    newLog = new string[maxErrorLines];
+                    currentLog.CopyTo(newLog, 1);
+                    newLog[maxErrorLines - 1] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + message;
+                }
+                else
+                {
+                    newLog = new string[currentLog.Length + 1];
+                    currentLog.CopyTo(newLog, 0);
+                    newLog[currentLog.Length] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + message;
+                }
+                File.WriteAllLines(errorLogPath, newLog);
             }
-            else
-            {
-                newLog = new string[currentLog.Length + 1];
-                currentLog.CopyTo(newLog, 0);
-                newLog[currentLog.Length] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + message;
-            }
-            File.WriteAllLines(errorLogPath, newLog);
 
         }
 
         public void WriteWorkingLog(string[] info)
         {
             // BUG: Если открыть этот лог в Excel, появляется проблема с кодировкой
-            StreamWriter writer = File.AppendText(currentWorkingLog);                        
-            writer.WriteLine(string.Join(";", info));
-            writer.Close();
+            lock (lockFiles)
+            {
+                StreamWriter writer = File.AppendText(currentWorkingLog);
+                writer.WriteLine(string.Join(";", info));
+                writer.Close();
+            }
         }
         
 
         public string WorkingLog
         {
-        get
+            get
             {
-                string[] lines = File.ReadAllLines(currentWorkingLog);
-                return string.Join(Environment.NewLine, lines.Reverse()).Replace(";","\t");
+                lock (lockFiles)
+                {
+                    string[] lines = File.ReadAllLines(currentWorkingLog);
+                    return string.Join(Environment.NewLine, lines.Reverse()).Replace(";", "\t");
+                }
             }
         }
 
         public string[] WorkingLogLines
         {
-        get
+            get
             {
-                string[] lines = File.ReadAllLines(currentWorkingLog);
-                return lines;
+                lock (lockFiles)
+                {
+                    string[] lines = File.ReadAllLines(currentWorkingLog);
+                    return lines;
+                }
             }
         }
 
@@ -81,8 +95,11 @@ namespace XMLimport
         {
             get
             {
-                string[] lines = File.ReadAllLines(errorLogPath);
-                return string.Join(Environment.NewLine, lines.Reverse()).Replace(";", "\t");
+                lock (lockFiles)
+                {
+                    string[] lines = File.ReadAllLines(errorLogPath);
+                    return string.Join(Environment.NewLine, lines.Reverse()).Replace(";", "\t");
+                }
             }
         }
 
@@ -90,8 +107,11 @@ namespace XMLimport
         {
             get
             {
-                string[] lines = File.ReadAllLines(errorLogPath);
-                return lines;
+                lock (lockFiles)
+                {
+                    string[] lines = File.ReadAllLines(errorLogPath);
+                    return lines;
+                }
             }
         }
 
@@ -99,7 +119,8 @@ namespace XMLimport
         {
             get
             {
-                return File.ReadAllLines(errorLogPath).Last();
+                lock (lockFiles)
+                    return File.ReadAllLines(errorLogPath).Last();
             }
         }
     }

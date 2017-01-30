@@ -50,11 +50,8 @@ namespace XMLimport
                             }
                             catch (Exception ex)
                             {
-                                lock (main.Logger)
-                                {
-                                    main.Logger.WriteError("Ошибка архивирования файла " + f +
-                                        Environment.NewLine + ex.Message);
-                                }
+                                main.Logger.WriteError("Ошибка архивирования файла " + f +
+                                    Environment.NewLine + ex.Message);
                                 file.MoveTo(Path.Combine(s.ArchiveFolder + Path.GetFileNameWithoutExtension(f) + ".error"));
                             }
                         }

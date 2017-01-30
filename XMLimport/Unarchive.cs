@@ -50,20 +50,14 @@ namespace XMLimport
                                 if (!Extract(f, Path.Combine(appFolder, "rar.exe"), "e -y " + Path.Combine(inbox, f)))
                                     if (!Extract(f, Path.Combine(appFolder, "unzip.exe"), "-q " + Path.Combine(inbox, f)))
                                     {
-                                        lock (main.Logger)
-                                        {
-                                            main.Logger.WriteError("Не удалось распаковать " + f + ": распаковщик вернул ненулевой код");
-                                        }
+                                        main.Logger.WriteError("Не удалось распаковать " + f + ": распаковщик вернул ненулевой код");
                                         File.Move(f, f + "_error"); // I deliberately cling it after the extension so that 
                                                                     // program ingore it from now on until a human takes care of the file
                                     }
                             }
                             catch (Exception ex)
                             {
-                                lock (main.Logger)
-                                {
-                                    main.Logger.WriteError("Не удалось распаковать " + f + ": " + ex.Message);
-                                }
+                                main.Logger.WriteError("Не удалось распаковать " + f + ": " + ex.Message);
                                 File.Move(f, f + "_error"); // I deliberately cling it after the extension so that 
                                                             // program ingore it from now on until a human takes care of the file
                             }

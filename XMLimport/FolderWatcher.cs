@@ -41,38 +41,29 @@ namespace XMLimport
             {
                 if (main.Process)
                 {
-                    lock (main.XMLs)
+                    foreach (string f in Directory.GetFiles(inbox))
                     {
-                        foreach (string f in Directory.GetFiles(inbox))
+                        if (!main.XMLs.ContainsKey(f) &&
+                            !main.Disposables.Contains(f) &&
+                            !main.Pass.Contains(f) &&
+                            regex.IsMatch(f))
                         {
-                            if (!main.XMLs.ContainsKey(f) &&
-                                !main.Disposables.Contains(f) &&
-                                !main.Pass.Contains(f) &&
-                                regex.IsMatch(f))
+                            xml = new XmlDocument();
+                            try
                             {
-                                xml = new XmlDocument();
-                                try
-                                {
-                                    xml.Load(f);
-                                }
-                                catch (Exception ex)
-                                {
-                                    lock (main.Logger)
-                                    {
-                                        main.Logger.WriteError("Ошибка загрузки xml " + f + ": " + ex.Message);
-                                    }
-                                    main.Disposables.Add(f);
-                                    continue;
-                                }
-                                main.XMLs.Add(f, xml);
+                                xml.Load(f);
                             }
+                            catch (Exception ex)
+                            {
+                                main.Logger.WriteError("Ошибка загрузки xml " + f + ": " + ex.Message);
+                                main.Disposables.Add(f);
+                                continue;
+                            }
+                            main.XMLs.Add(f, xml);
                         }
                     }
                     List<string> copy_Disposables;
-                    lock (main.Disposables)
-                    {
-                        copy_Disposables = new List<string>(main.Disposables);
-                    }
+                    copy_Disposables = new List<string>(main.Disposables);
                     foreach (string f in copy_Disposables)
                     {
                         try
@@ -83,11 +74,8 @@ namespace XMLimport
                         }
                         catch (Exception ex)
                         {
-                            lock (main.Logger)
-                            {
-                                main.Logger.WriteError("Невозможно переместить файл: " + f + ": " + ex.Message);
-                                main.Pass.Add(f);
-                            }
+                            main.Logger.WriteError("Невозможно переместить файл: " + f + ": " + ex.Message);
+                            main.Pass.Add(f);
                         }
                         main.Disposables.Remove(f);
                     }
@@ -95,7 +83,6 @@ namespace XMLimport
                 }
                 Thread.Sleep(1000);
             }
-
         }
     }
 }

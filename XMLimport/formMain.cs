@@ -29,6 +29,8 @@ namespace XMLimport
         private int currentProgress;
         private string windowTitle = "Импорт данных из XML";
 
+        private object lockProperties = new object();
+
         Thread thrXML;
         Thread thrFiles;
         Thread thrUnarch;
@@ -225,6 +227,7 @@ namespace XMLimport
 
         public string[] CurrentInfo
         {
+            
             get
             {
                 return currentInfo;
@@ -232,7 +235,8 @@ namespace XMLimport
 
             set
             {
-                currentInfo = value;
+                lock (lockProperties)
+                    currentInfo = value;
             }
         }
 
