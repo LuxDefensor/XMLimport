@@ -48,6 +48,7 @@ namespace XMLimport
                             !main.Pass.Contains(f) &&
                             regex.IsMatch(f))
                         {
+                            Thread.Sleep(500);
                             xml = new XmlDocument();
                             try
                             {

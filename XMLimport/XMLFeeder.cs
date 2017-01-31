@@ -186,7 +186,7 @@ namespace XMLimport
             catch (Exception ex)
             {
                 main.Logger.WriteError("XMLFeeder.EnsureExport: Ошибка чтения списка для экспорта" +
-                    Environment.NewLine + ex.Message);
+                                    Environment.NewLine + ex.Message);
                 return;
             }
             if (list.Contains(info[2]))
