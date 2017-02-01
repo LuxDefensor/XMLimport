@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Timers;
 
 namespace XMLimport
 {
@@ -12,6 +13,7 @@ namespace XMLimport
         private string workingLogPrefix = Directory.GetCurrentDirectory() + @"\Logs\";
         private string currentWorkingLog;
         private int maxErrorLines;
+        private Timer t;
 
         private object lockFiles = new object();
 
@@ -30,6 +32,23 @@ namespace XMLimport
                 f.Close();
             }
             this.maxErrorLines = maxErrorLines;
+            t = new Timer(3600000);
+            t.Elapsed += T_Elapsed;
+        }
+
+        private void T_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            DateTime today = DateTime.Today.Date;
+            string newWorkingLog = workingLogPrefix + today.Year + today.Month.ToString("00") + "01.csv";
+            if (newWorkingLog != currentWorkingLog)
+            {
+                currentWorkingLog = newWorkingLog;
+                if (!File.Exists(currentWorkingLog))
+                {
+                    var f = File.Create(currentWorkingLog);
+                    f.Close();
+                }
+            }
         }
 
         public void WriteError(string message)
