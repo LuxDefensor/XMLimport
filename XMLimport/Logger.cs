@@ -34,6 +34,7 @@ namespace XMLimport
             this.maxErrorLines = maxErrorLines;
             t = new Timer(3600000);
             t.Elapsed += T_Elapsed;
+            t.Start();
         }
 
         private void T_Elapsed(object sender, ElapsedEventArgs e)
