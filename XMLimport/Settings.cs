@@ -12,6 +12,7 @@ namespace XMLimport
         private const string ignoreFile = "IgnoreStatus.lst";
         private static string exportFile = "ExportToXLS.lst";
         private static string codesFile = "XMLCodes.lst";
+        private static string blackList = "BlackList.lst";
         private string server;
         private string database;
         private string userName;
@@ -51,6 +52,14 @@ namespace XMLimport
         get
             {
                 return exportFile;
+            }
+        }
+
+        public static string BlackList
+        {
+        get
+            {
+                return blackList;
             }
         }
 

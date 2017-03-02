@@ -18,6 +18,7 @@ namespace XMLimport
         private bool isRunning;
 
         private string[] ignores;
+        private string[] blackList;
 
         public XMLFeeder(formMain mainForm)
         {
@@ -26,6 +27,16 @@ namespace XMLimport
             m = new Model(settings.Server, settings.Database, settings.UserName, settings.Password, settings.Season);
             m.PrepareTable();
             ignores = settings.IgnoreList;
+            try
+            {
+                blackList = File.ReadAllLines(Settings.BlackList);
+            }
+            catch (Exception ex)
+            {
+                main.Logger.WriteError("XMLFeeder.Constructor: Ошибка чтения черного списка" +
+                    Environment.NewLine + ex.Message);
+                blackList = new string[] { "" };
+            }
         }
 
         public void EndProcess()
@@ -93,6 +104,18 @@ namespace XMLimport
                                 main.Disposables.Add(xml.Key);
                                 continue;
                             }
+                            // Check black list
+                            if (blackList.Contains(info[2]))
+                            {
+                                info[10] = "в ЧС";
+                                main.Logger.WriteWorkingLog(info);
+                                main.XMLs.Remove(xml.Key);
+                                main.Disposables.Add(xml.Key);
+                                main.CurrentInfo = info;
+                                EnsureExport(info);
+                                return;
+                            }
+                            // process xml
                             try
                             {
                                 IgnoreStatus = IgnoreStatus || settings.IgnoreList.Contains(info[2]); // Is it in the ignore status list
@@ -168,6 +191,7 @@ namespace XMLimport
                             main.XMLs.Remove(xml.Key);
                             main.Disposables.Add(xml.Key);
                             main.CurrentInfo = info;
+                            main.LoadLog();
                             EnsureExport(info);
                         }
                     }

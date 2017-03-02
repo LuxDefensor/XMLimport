@@ -120,8 +120,8 @@ namespace XMLimport
                                     xml.Descendants("job").Count().ToString(),
                                     string.Empty,
                                     string.Empty,
-                                    string.Empty,
                                     DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"),
+                                    string.Empty,
                                     "OK"
                                 };
                                 main.Logger.WriteWorkingLog(info);

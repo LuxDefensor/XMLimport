@@ -90,7 +90,14 @@ namespace XMLimport
             menuFindXML.Click += MenuFindXML_Click;
             menuIgnoreList.Click += MenuIgnoreList_Click;
             menuExportCodesList.Click += MenuExportCodesList_Click;
+            menuBlackList.Click += MenuBlackList_Click;
             #endregion
+        }
+
+        private void MenuBlackList_Click(object sender, EventArgs e)
+        {
+            formBlackList frm = new formBlackList();
+            frm.ShowDialog(this);
         }
 
         private void MenuExportCodesList_Click(object sender, EventArgs e)
@@ -134,7 +141,7 @@ namespace XMLimport
             txtReport.Text = thrReport.ThreadState.ToString();
             ShowCurrentInfo();
             UpdateProgress();
-            UpdateLog();
+            //UpdateLog();
         }
 
         private void MenuExit_Click(object sender, EventArgs e)
@@ -232,7 +239,6 @@ namespace XMLimport
             {
                 return currentInfo;
             }
-
             set
             {
                 lock (lockProperties)
@@ -258,6 +264,7 @@ namespace XMLimport
             this.WindowState = FormWindowState.Maximized;
             
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Application.ExecutablePath));
+            LoadLog();
             process = settings.RunOnStart;
             if (process)
             {
@@ -297,9 +304,12 @@ namespace XMLimport
             txtCompleted.Text = CurrentProgress.ToString();
         }
 
-        private void UpdateLog()
+        public void LoadLog()
         {
-            txtLog.Text = logger.WorkingLog;
+            dgvLog.Rows.Clear();
+            string[] lines = logger.WorkingLogLines.Reverse().ToArray();
+            foreach (string line in lines)
+                dgvLog.Rows.Add(line.Split(';'));
         }
 
         public string[] ThreadsStat()

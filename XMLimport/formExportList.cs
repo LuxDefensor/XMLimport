@@ -45,11 +45,8 @@ namespace XMLimport
             }
             catch (Exception ex)
             {
-                lock (main.Logger)
-                {
-                    main.Logger.WriteError("Ошибка чтения списка экспорта" +
-                        Environment.NewLine + ex.Message);
-                }
+                main.Logger.WriteError("Ошибка чтения списка экспорта" +
+                    Environment.NewLine + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка чтения списка для экспорта",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
@@ -66,11 +63,8 @@ namespace XMLimport
                 }
                 catch (Exception ex)
                 {
-                    lock (main.Logger)
-                    {
-                        main.Logger.WriteError("Ошибка записи списка для экспорта" +
-                            Environment.NewLine + ex.Message);
-                    }
+                    main.Logger.WriteError("Ошибка записи списка для экспорта" +
+                        Environment.NewLine + ex.Message);
                     MessageBox.Show(ex.Message, "Ошибка записи списка для экспорта",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -84,13 +78,10 @@ namespace XMLimport
             {
                 txtCodes.Lines = File.ReadAllLines(Settings.ExportFile);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                lock (main.Logger)
-                {
-                    main.Logger.WriteError("Ошибка чтения списка экспорта" +
-                        Environment.NewLine + ex.Message);
-                }
+                main.Logger.WriteError("Ошибка чтения списка экспорта" +
+                    Environment.NewLine + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка чтения списка для экспорта",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();

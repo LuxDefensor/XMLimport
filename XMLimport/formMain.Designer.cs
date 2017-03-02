@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +41,7 @@
             this.menuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIgnoreList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExportCodesList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBlackList = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnStart = new System.Windows.Forms.ToolStripButton();
@@ -75,12 +77,24 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtLog = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dgvLog = new System.Windows.Forms.DataGridView();
+            this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.day = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.points = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.values = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.processed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.started = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ended = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -135,7 +149,8 @@
             this.menuService.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuSettings,
             this.menuIgnoreList,
-            this.menuExportCodesList});
+            this.menuExportCodesList,
+            this.menuBlackList});
             this.menuService.Name = "menuService";
             this.menuService.Size = new System.Drawing.Size(59, 20);
             this.menuService.Text = "Сервис";
@@ -143,20 +158,26 @@
             // menuSettings
             // 
             this.menuSettings.Name = "menuSettings";
-            this.menuSettings.Size = new System.Drawing.Size(225, 22);
+            this.menuSettings.Size = new System.Drawing.Size(226, 22);
             this.menuSettings.Text = "Настройки";
             // 
             // menuIgnoreList
             // 
             this.menuIgnoreList.Name = "menuIgnoreList";
-            this.menuIgnoreList.Size = new System.Drawing.Size(225, 22);
+            this.menuIgnoreList.Size = new System.Drawing.Size(226, 22);
             this.menuIgnoreList.Text = "Список исключений";
             // 
             // menuExportCodesList
             // 
             this.menuExportCodesList.Name = "menuExportCodesList";
-            this.menuExportCodesList.Size = new System.Drawing.Size(225, 22);
+            this.menuExportCodesList.Size = new System.Drawing.Size(226, 22);
             this.menuExportCodesList.Text = "Список кодов для экспорта";
+            // 
+            // menuBlackList
+            // 
+            this.menuBlackList.Name = "menuBlackList";
+            this.menuBlackList.Size = new System.Drawing.Size(226, 22);
+            this.menuBlackList.Text = "Черный список смежников";
             // 
             // tableLayoutPanel1
             // 
@@ -164,7 +185,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtLog, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dgvLog, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -469,20 +490,112 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Имя файла:";
             // 
-            // txtLog
-            // 
-            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLog.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtLog.Location = new System.Drawing.Point(3, 178);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(1026, 309);
-            this.txtLog.TabIndex = 2;
-            // 
             // timer1
             // 
             this.timer1.Interval = 1000;
+            // 
+            // dgvLog
+            // 
+            this.dgvLog.AllowUserToAddRows = false;
+            this.dgvLog.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fileName,
+            this.fileSize,
+            this.inn,
+            this.sender,
+            this.day,
+            this.points,
+            this.values,
+            this.processed,
+            this.started,
+            this.ended,
+            this.status});
+            this.dgvLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLog.Location = new System.Drawing.Point(3, 178);
+            this.dgvLog.MultiSelect = false;
+            this.dgvLog.Name = "dgvLog";
+            this.dgvLog.ReadOnly = true;
+            this.dgvLog.RowHeadersVisible = false;
+            this.dgvLog.Size = new System.Drawing.Size(1026, 309);
+            this.dgvLog.TabIndex = 2;
+            // 
+            // fileName
+            // 
+            this.fileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fileName.HeaderText = "Имя файла";
+            this.fileName.Name = "fileName";
+            this.fileName.ReadOnly = true;
+            // 
+            // fileSize
+            // 
+            this.fileSize.HeaderText = "Размер";
+            this.fileSize.Name = "fileSize";
+            this.fileSize.ReadOnly = true;
+            // 
+            // inn
+            // 
+            this.inn.HeaderText = "ИНН";
+            this.inn.Name = "inn";
+            this.inn.ReadOnly = true;
+            // 
+            // sender
+            // 
+            this.sender.HeaderText = "Смежник";
+            this.sender.Name = "sender";
+            this.sender.ReadOnly = true;
+            this.sender.Width = 200;
+            // 
+            // day
+            // 
+            this.day.HeaderText = "день XML";
+            this.day.Name = "day";
+            this.day.ReadOnly = true;
+            // 
+            // points
+            // 
+            this.points.HeaderText = "ТИ";
+            this.points.Name = "points";
+            this.points.ReadOnly = true;
+            // 
+            // values
+            // 
+            this.values.HeaderText = "знач";
+            this.values.Name = "values";
+            this.values.ReadOnly = true;
+            // 
+            // processed
+            // 
+            this.processed.HeaderText = "обраб";
+            this.processed.Name = "processed";
+            this.processed.ReadOnly = true;
+            // 
+            // started
+            // 
+            this.started.HeaderText = "начало";
+            this.started.Name = "started";
+            this.started.ReadOnly = true;
+            // 
+            // ended
+            // 
+            this.ended.HeaderText = "конец";
+            this.ended.Name = "ended";
+            this.ended.ReadOnly = true;
+            this.ended.Width = 50;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Статус";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
             // 
             // formMain
             // 
@@ -502,6 +615,7 @@
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -536,7 +650,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtBeginning;
         private System.Windows.Forms.ToolStripMenuItem menuExit;
-        private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripTextBox txtWatcherStat;
@@ -556,6 +669,19 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         private System.Windows.Forms.ToolStripTextBox txtReport;
         private System.Windows.Forms.ToolStripMenuItem menuExportCodesList;
+        private System.Windows.Forms.ToolStripMenuItem menuBlackList;
+        private System.Windows.Forms.DataGridView dgvLog;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fileSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn inn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn day;
+        private System.Windows.Forms.DataGridViewTextBoxColumn points;
+        private System.Windows.Forms.DataGridViewTextBoxColumn values;
+        private System.Windows.Forms.DataGridViewTextBoxColumn processed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn started;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ended;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
     }
 }
 
