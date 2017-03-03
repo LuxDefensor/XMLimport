@@ -113,7 +113,7 @@ namespace XMLimport
                                 main.Disposables.Add(xml.Key);
                                 main.CurrentInfo = info;
                                 EnsureExport(info);
-                                return;
+                                continue;
                             }
                             // process xml
                             try

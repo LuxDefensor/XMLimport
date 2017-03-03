@@ -77,8 +77,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dgvLog = new System.Windows.Forms.DataGridView();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -191,7 +191,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1032, 490);
             this.tableLayoutPanel1.TabIndex = 1;
@@ -322,12 +322,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1026, 144);
+            this.panel1.Size = new System.Drawing.Size(1026, 124);
             this.panel1.TabIndex = 1;
             // 
             // txtStatus
             // 
-            this.txtStatus.Location = new System.Drawing.Point(594, 100);
+            this.txtStatus.BackColor = System.Drawing.SystemColors.WindowText;
+            this.txtStatus.ForeColor = System.Drawing.SystemColors.Control;
+            this.txtStatus.Location = new System.Drawing.Point(594, 86);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.Size = new System.Drawing.Size(100, 20);
             this.txtStatus.TabIndex = 19;
@@ -335,7 +337,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(544, 103);
+            this.label10.Location = new System.Drawing.Point(544, 89);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 13);
             this.label10.TabIndex = 18;
@@ -343,7 +345,7 @@
             // 
             // txtCompleted
             // 
-            this.txtCompleted.Location = new System.Drawing.Point(446, 100);
+            this.txtCompleted.Location = new System.Drawing.Point(446, 86);
             this.txtCompleted.Name = "txtCompleted";
             this.txtCompleted.Size = new System.Drawing.Size(74, 20);
             this.txtCompleted.TabIndex = 17;
@@ -351,7 +353,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(369, 103);
+            this.label9.Location = new System.Drawing.Point(369, 89);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(71, 13);
             this.label9.TabIndex = 16;
@@ -359,7 +361,7 @@
             // 
             // txtValuesCount
             // 
-            this.txtValuesCount.Location = new System.Drawing.Point(274, 100);
+            this.txtValuesCount.Location = new System.Drawing.Point(274, 86);
             this.txtValuesCount.Name = "txtValuesCount";
             this.txtValuesCount.Size = new System.Drawing.Size(74, 20);
             this.txtValuesCount.TabIndex = 15;
@@ -367,7 +369,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(211, 103);
+            this.label8.Location = new System.Drawing.Point(211, 89);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 13);
             this.label8.TabIndex = 14;
@@ -375,7 +377,7 @@
             // 
             // txtPointsCount
             // 
-            this.txtPointsCount.Location = new System.Drawing.Point(136, 100);
+            this.txtPointsCount.Location = new System.Drawing.Point(136, 86);
             this.txtPointsCount.Name = "txtPointsCount";
             this.txtPointsCount.Size = new System.Drawing.Size(54, 20);
             this.txtPointsCount.TabIndex = 13;
@@ -383,7 +385,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 103);
+            this.label7.Location = new System.Drawing.Point(9, 89);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(121, 13);
             this.label7.TabIndex = 12;
@@ -391,7 +393,7 @@
             // 
             // txtBeginning
             // 
-            this.txtBeginning.Location = new System.Drawing.Point(387, 71);
+            this.txtBeginning.Location = new System.Drawing.Point(387, 59);
             this.txtBeginning.Name = "txtBeginning";
             this.txtBeginning.Size = new System.Drawing.Size(152, 20);
             this.txtBeginning.TabIndex = 11;
@@ -399,7 +401,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(296, 74);
+            this.label6.Location = new System.Drawing.Point(296, 62);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 13);
             this.label6.TabIndex = 10;
@@ -407,18 +409,21 @@
             // 
             // txtXMLDay
             // 
+            this.txtXMLDay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txtXMLDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtXMLDay.Location = new System.Drawing.Point(122, 71);
+            this.txtXMLDay.ForeColor = System.Drawing.Color.Red;
+            this.txtXMLDay.Location = new System.Drawing.Point(122, 59);
             this.txtXMLDay.Name = "txtXMLDay";
             this.txtXMLDay.Size = new System.Drawing.Size(136, 20);
             this.txtXMLDay.TabIndex = 9;
+            this.txtXMLDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(9, 74);
+            this.label5.Location = new System.Drawing.Point(9, 62);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 13);
             this.label5.TabIndex = 8;
@@ -426,7 +431,7 @@
             // 
             // txtINN
             // 
-            this.txtINN.Location = new System.Drawing.Point(621, 32);
+            this.txtINN.Location = new System.Drawing.Point(639, 32);
             this.txtINN.Name = "txtINN";
             this.txtINN.Size = new System.Drawing.Size(143, 20);
             this.txtINN.TabIndex = 7;
@@ -434,7 +439,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(581, 35);
+            this.label4.Location = new System.Drawing.Point(599, 35);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 6;
@@ -442,7 +447,7 @@
             // 
             // txtSenderName
             // 
-            this.txtSenderName.Location = new System.Drawing.Point(230, 32);
+            this.txtSenderName.Location = new System.Drawing.Point(248, 32);
             this.txtSenderName.Name = "txtSenderName";
             this.txtSenderName.Size = new System.Drawing.Size(331, 20);
             this.txtSenderName.TabIndex = 5;
@@ -450,7 +455,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(151, 35);
+            this.label3.Location = new System.Drawing.Point(169, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 13);
             this.label3.TabIndex = 4;
@@ -458,7 +463,7 @@
             // 
             // txtFileSize
             // 
-            this.txtFileSize.Location = new System.Drawing.Point(64, 32);
+            this.txtFileSize.Location = new System.Drawing.Point(82, 32);
             this.txtFileSize.Name = "txtFileSize";
             this.txtFileSize.Size = new System.Drawing.Size(66, 20);
             this.txtFileSize.TabIndex = 3;
@@ -490,10 +495,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Имя файла:";
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            // 
             // dgvLog
             // 
             this.dgvLog.AllowUserToAddRows = false;
@@ -520,18 +521,23 @@
             this.ended,
             this.status});
             this.dgvLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLog.Location = new System.Drawing.Point(3, 178);
+            this.dgvLog.Location = new System.Drawing.Point(3, 158);
             this.dgvLog.MultiSelect = false;
             this.dgvLog.Name = "dgvLog";
             this.dgvLog.ReadOnly = true;
             this.dgvLog.RowHeadersVisible = false;
-            this.dgvLog.Size = new System.Drawing.Size(1026, 309);
+            this.dgvLog.Size = new System.Drawing.Size(1026, 329);
             this.dgvLog.TabIndex = 2;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
             // 
             // fileName
             // 
             this.fileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.fileName.HeaderText = "Имя файла";
+            this.fileName.MinimumWidth = 100;
             this.fileName.Name = "fileName";
             this.fileName.ReadOnly = true;
             // 
@@ -540,43 +546,49 @@
             this.fileSize.HeaderText = "Размер";
             this.fileSize.Name = "fileSize";
             this.fileSize.ReadOnly = true;
+            this.fileSize.Width = 60;
             // 
             // inn
             // 
             this.inn.HeaderText = "ИНН";
             this.inn.Name = "inn";
             this.inn.ReadOnly = true;
+            this.inn.Width = 90;
             // 
             // sender
             // 
             this.sender.HeaderText = "Смежник";
             this.sender.Name = "sender";
             this.sender.ReadOnly = true;
-            this.sender.Width = 200;
+            this.sender.Width = 250;
             // 
             // day
             // 
             this.day.HeaderText = "день XML";
             this.day.Name = "day";
             this.day.ReadOnly = true;
+            this.day.Width = 80;
             // 
             // points
             // 
             this.points.HeaderText = "ТИ";
             this.points.Name = "points";
             this.points.ReadOnly = true;
+            this.points.Width = 30;
             // 
             // values
             // 
             this.values.HeaderText = "знач";
             this.values.Name = "values";
             this.values.ReadOnly = true;
+            this.values.Width = 40;
             // 
             // processed
             // 
             this.processed.HeaderText = "обраб";
             this.processed.Name = "processed";
             this.processed.ReadOnly = true;
+            this.processed.Width = 40;
             // 
             // started
             // 
