@@ -306,10 +306,13 @@ namespace XMLimport
 
         public void LoadLog()
         {
-            dgvLog.Rows.Clear();
-            string[] lines = logger.WorkingLogLines.Reverse().ToArray();
-            foreach (string line in lines)
-                dgvLog.Rows.Add(line.Split(';'));
+            lock (lockProperties)
+            {
+                dgvLog.Rows.Clear();
+                string[] lines = logger.WorkingLogLines.Reverse().ToArray();
+                foreach (string line in lines)
+                    dgvLog.Rows.Add(line.Split(';'));
+            }
         }
 
         public string[] ThreadsStat()
