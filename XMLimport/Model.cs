@@ -514,7 +514,7 @@ namespace XMLimport
                     }
                 }
             }
-        }       
+        }
 
         public void WriteAllFromTemp(bool rewrite)
         {
@@ -526,26 +526,61 @@ namespace XMLimport
                 SqlCommand cmd = cn.CreateCommand();
                 if (rewrite)
                 {
-                    sql.Append("DELETE FROM Data WHERE EXISTS (SELECT * FROM Data_Temp t WHERE ");
-                    sql.Append("Data.Parnumber=t.Parnumber AND Data.Object=T.Object AND ");
-                    sql.Append("Data.Item=t.Item AND Data.Data_Date=t.Data_Date)");
-                    cmd.CommandText = sql.ToString();
-                    cmd.Transaction = tran;
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        tran.Rollback();
-                        throw new Exception("Ошибка удаления существующих значений из таблицы Data. Timeout=" + cn.ConnectionTimeout, ex);
-                    }
-                    sql.Clear();
+                    //sql.Append("DELETE FROM Data WHERE EXISTS (SELECT * FROM Data_Temp t WHERE ");
+                    //sql.Append("Data.Parnumber=t.Parnumber AND Data.Object=T.Object AND ");
+                    //sql.Append("Data.Item=t.Item AND Data.Data_Date=t.Data_Date)");
+                    sql.Append(@"delete from data
+                                    where cast(data_date as nvarchar) +
+                                          '_' +
+                                          cast(object as nvarchar) +
+                                          '_' +
+                                          cast(item as nvarchar) +
+                                          '_' +
+                                          cast(parnumber as nvarchar) in
+                                        (select cast(data_date as nvarchar) +
+                                          '_' +
+                                          cast(object as nvarchar) +
+                                          '_' +
+                                          cast(item as nvarchar) +
+                                          '_' +
+                                          cast(parnumber as nvarchar) idx
+                                          from data_temp t)");
                 }
+                else
+                {
+                    sql.Append(@"delete from data_temp
+                                    where cast(data_date as nvarchar) +
+                                          '_' +
+                                          cast(object as nvarchar) +
+                                          '_' +
+                                          cast(item as nvarchar) +
+                                          '_' +
+                                          cast(parnumber as nvarchar) in
+                                        (select cast(data_date as nvarchar) +
+                                          '_' +
+                                          cast(object as nvarchar) +
+                                          '_' +
+                                          cast(item as nvarchar) +
+                                          '_' +
+                                          cast(parnumber as nvarchar) idx
+                                          from data t)");
+                }
+                cmd.CommandText = sql.ToString();
+                cmd.Transaction = tran;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    throw new Exception("Ошибка удаления существующих значений из таблицы Data. Timeout=" + cn.ConnectionTimeout, ex);
+                }
+                sql.Clear();
                 sql.Append("INSERT INTO Data(parnumber, object, item, value0, value1, ");
                 sql.Append("OBJTYPE, data_date, rcvstamp, season, p2kstatus, P2KSTATUSH, appid)");
                 sql.Append("SELECT parnumber, object, item, value0, value1, ");
-                sql.Append("OBJTYPE, data_date, rcvstamp, season, p2kstatus, P2KSTATUSH, appid FROM Data_Temp");
+                sql.Append("OBJTYPE, data_date, rcvstamp, season, p2kstatus, P2KSTATUSH, appid FROM Data_Temp ");
                 cmd.CommandText = sql.ToString();
                 try
                 {
