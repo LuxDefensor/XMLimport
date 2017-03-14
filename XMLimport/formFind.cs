@@ -21,7 +21,7 @@ namespace XMLimport
         {
             InitializeComponent();
             s = new Settings();
-            this.Load += FormFind_Load;            
+            this.Load += FormFind_Load;
             btnLoad.Click += BtnLoad_Click;
             btnSave.Click += BtnSave_Click;
             btnFind.Click += BtnFind_Click;
@@ -34,6 +34,15 @@ namespace XMLimport
             menuOpenInIE.Click += MenuOpenInIE_Click;
             menuToProcess.Click += BtnToProcess_Click;
             menuToCheck.Click += BtnToCheck_Click;
+            menuDeleteCode.Click += MenuDeleteCode_Click;
+        }
+
+        private void MenuDeleteCode_Click(object sender, EventArgs e)
+        {
+            if (dgvCodes.SelectedRows.Count == 1)
+            {
+                dgvCodes.Rows.Remove(dgvCodes.SelectedRows[0]);
+            }
         }
 
         private void MenuOpenInIE_Click(object sender, EventArgs e)

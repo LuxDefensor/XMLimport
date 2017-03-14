@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabSearch = new System.Windows.Forms.TabPage();
             this.dgvCodes = new System.Windows.Forms.DataGridView();
@@ -55,17 +55,19 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnToProcess = new System.Windows.Forms.Button();
             this.dgvResults = new System.Windows.Forms.DataGridView();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuToProcess = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuOpenInNotepad = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuOpenInIE = new System.Windows.Forms.ToolStripMenuItem();
             this.colFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuToCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuOpenInNotepad = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenInIE = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuToCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuToProcess = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuDeleteCode = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodes)).BeginInit();
@@ -73,6 +75,7 @@
             this.tabResults.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -109,6 +112,7 @@
             this.dgvCodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Code,
             this.Title});
+            this.dgvCodes.ContextMenuStrip = this.contextMenuStrip2;
             this.dgvCodes.Location = new System.Drawing.Point(9, 40);
             this.dgvCodes.MultiSelect = false;
             this.dgvCodes.Name = "dgvCodes";
@@ -327,46 +331,6 @@
             this.dgvResults.Size = new System.Drawing.Size(738, 408);
             this.dgvResults.TabIndex = 0;
             // 
-            // btnOK
-            // 
-            this.btnOK.Location = new System.Drawing.Point(685, 521);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 2;
-            this.btnOK.Text = "Закрыть";
-            this.btnOK.UseVisualStyleBackColor = true;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuOpenInNotepad,
-            this.menuOpenInIE,
-            this.toolStripSeparator1,
-            this.menuToCheck,
-            this.toolStripSeparator2,
-            this.menuToProcess});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 126);
-            // 
-            // menuToProcess
-            // 
-            this.menuToProcess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.menuToProcess.Name = "menuToProcess";
-            this.menuToProcess.Size = new System.Drawing.Size(185, 22);
-            this.menuToProcess.Text = "На конвейер";
-            // 
-            // menuOpenInNotepad
-            // 
-            this.menuOpenInNotepad.Name = "menuOpenInNotepad";
-            this.menuOpenInNotepad.Size = new System.Drawing.Size(185, 22);
-            this.menuOpenInNotepad.Text = "Открыть в блокноте";
-            // 
-            // menuOpenInIE
-            // 
-            this.menuOpenInIE.Name = "menuOpenInIE";
-            this.menuOpenInIE.Size = new System.Drawing.Size(185, 22);
-            this.menuOpenInIE.Text = "Открыть в IE";
-            // 
             // colFileName
             // 
             this.colFileName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -383,13 +347,42 @@
             // 
             // colDate
             // 
-            dataGridViewCellStyle1.Format = "G";
-            dataGridViewCellStyle1.NullValue = null;
-            this.colDate.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "G";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDate.HeaderText = "Изменен";
             this.colDate.Name = "colDate";
             this.colDate.ReadOnly = true;
             this.colDate.Width = 120;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuOpenInNotepad,
+            this.menuOpenInIE,
+            this.toolStripSeparator1,
+            this.menuToCheck,
+            this.toolStripSeparator2,
+            this.menuToProcess});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 104);
+            // 
+            // menuOpenInNotepad
+            // 
+            this.menuOpenInNotepad.Name = "menuOpenInNotepad";
+            this.menuOpenInNotepad.Size = new System.Drawing.Size(185, 22);
+            this.menuOpenInNotepad.Text = "Открыть в блокноте";
+            // 
+            // menuOpenInIE
+            // 
+            this.menuOpenInIE.Name = "menuOpenInIE";
+            this.menuOpenInIE.Size = new System.Drawing.Size(185, 22);
+            this.menuOpenInIE.Text = "Открыть в IE";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
             // 
             // menuToCheck
             // 
@@ -397,15 +390,39 @@
             this.menuToCheck.Size = new System.Drawing.Size(185, 22);
             this.menuToCheck.Text = "Проверить";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
+            // 
+            // menuToProcess
+            // 
+            this.menuToProcess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.menuToProcess.Name = "menuToProcess";
+            this.menuToProcess.Size = new System.Drawing.Size(185, 22);
+            this.menuToProcess.Text = "На конвейер";
+            // 
+            // btnOK
+            // 
+            this.btnOK.Location = new System.Drawing.Point(685, 521);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(75, 23);
+            this.btnOK.TabIndex = 2;
+            this.btnOK.Text = "Закрыть";
+            this.btnOK.UseVisualStyleBackColor = true;
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuDeleteCode});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(119, 26);
+            // 
+            // menuDeleteCode
+            // 
+            this.menuDeleteCode.Name = "menuDeleteCode";
+            this.menuDeleteCode.Size = new System.Drawing.Size(152, 22);
+            this.menuDeleteCode.Text = "Удалить";
             // 
             // formFind
             // 
@@ -431,6 +448,7 @@
             this.tabResults.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -473,5 +491,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuToCheck;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem menuDeleteCode;
     }
 }

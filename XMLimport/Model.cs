@@ -29,7 +29,7 @@ namespace XMLimport
             csb.InitialCatalog = database;
             csb.UserID = userID;
             csb.Password = password;
-            csb.ConnectTimeout = 300;
+            csb.ConnectTimeout = 600;
             cs = csb.ConnectionString;
             this.season = season;
         }
@@ -485,8 +485,8 @@ namespace XMLimport
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(string.Format("Значение для {0}.{1} за {2} не добавлено",
-                        objectCode, itemCode, dataDate), ex);
+                    throw new Exception(string.Format("Значение для {0}.{1} за {2} не добавлено. Timeout={3}",
+                        objectCode, itemCode, dataDate, cn.ConnectionTimeout), ex);
                 }
                 sql.Clear();
                 if (result == null || Convert.IsDBNull(result) || (int)result == 0)
@@ -509,8 +509,8 @@ namespace XMLimport
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(string.Format("Значение для {0}.{1} за {2} не добавлено",
-                            objectCode, itemCode, dataDate), ex);
+                        throw new Exception(string.Format("Значение для {0}.{1} за {2} не добавлено. Timeout={3}",
+                            objectCode, itemCode, dataDate, cn.ConnectionTimeout), ex);
                     }
                 }
             }
@@ -538,7 +538,7 @@ namespace XMLimport
                     catch (Exception ex)
                     {
                         tran.Rollback();
-                        throw new Exception("Ошибка удаления существующих значений из таблицы Data", ex);
+                        throw new Exception("Ошибка удаления существующих значений из таблицы Data. Timeout=" + cn.ConnectionTimeout, ex);
                     }
                     sql.Clear();
                 }
@@ -554,7 +554,7 @@ namespace XMLimport
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    throw new Exception("Ошибка копирования данных из временной таблицы", ex);
+                    throw new Exception("Ошибка копирования данных из временной таблицы. Timeout=" + cn.ConnectionTimeout, ex);
                 }
                 sql.Clear();
                 cmd.CommandText = "DELETE FROM Data_Temp";
@@ -565,7 +565,7 @@ namespace XMLimport
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    throw new Exception("Ошибка очистки временной таблицы", ex);
+                    throw new Exception("Ошибка очистки временной таблицы. Timeout=" + cn.ConnectionTimeout, ex);
                 }
                 tran.Commit();
 
