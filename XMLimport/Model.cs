@@ -571,6 +571,24 @@ namespace XMLimport
 
             }
         }
+
+        public void ClearTempTable()
+        {
+            using (SqlConnection cn = new SqlConnection(cs))
+            {
+                cn.Open();
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = "DELETE FROM Data_Temp";
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ошибка при очистке временной таблицы. Timeout=" + cn.ConnectionTimeout, ex);
+                }
+            }
+        }
         #endregion
 
         #region Checking XML

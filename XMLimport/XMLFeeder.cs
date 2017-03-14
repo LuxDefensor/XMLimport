@@ -118,6 +118,7 @@ namespace XMLimport
                             // process xml
                             try
                             {
+                                m.ClearTempTable();
                                 IgnoreStatus = IgnoreStatus || settings.IgnoreList.Contains(info[2]); // Is it in the ignore status list
                                 day = new DateTime(int.Parse(info[4].Substring(0, 4)),
                                                    int.Parse(info[4].Substring(4, 2)),
@@ -184,6 +185,7 @@ namespace XMLimport
                                 main.Disposables.Add(xml.Key);
                                 info[10] = "Ошибка";
                                 main.Logger.WriteWorkingLog(info);
+                                main.MarkLogChanged(); 
                                 continue;
                             }
                             info[10] = "OK"; // Process result
