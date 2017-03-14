@@ -29,7 +29,7 @@ namespace XMLimport
             csb.InitialCatalog = database;
             csb.UserID = userID;
             csb.Password = password;
-            csb.ConnectTimeout = 600;
+            csb.ConnectTimeout = 1200;
             cs = csb.ConnectionString;
             this.season = season;
         }
@@ -526,9 +526,10 @@ namespace XMLimport
                 SqlCommand cmd = cn.CreateCommand();
                 if (rewrite)
                 {
-                    //sql.Append("DELETE FROM Data WHERE EXISTS (SELECT * FROM Data_Temp t WHERE ");
-                    //sql.Append("Data.Parnumber=t.Parnumber AND Data.Object=T.Object AND ");
-                    //sql.Append("Data.Item=t.Item AND Data.Data_Date=t.Data_Date)");
+                    sql.Append("DELETE FROM Data WHERE EXISTS (SELECT * FROM Data_Temp t WHERE ");
+                    sql.Append("Data.Parnumber=t.Parnumber AND Data.Object=T.Object AND ");
+                    sql.Append("Data.Item=t.Item AND Data.Data_Date=t.Data_Date)");
+                    /*
                     sql.Append(@"delete from data
                                     where cast(data_date as nvarchar) +
                                           '_' +
@@ -545,28 +546,33 @@ namespace XMLimport
                                           '_' +
                                           cast(parnumber as nvarchar) idx
                                           from data_temp t)");
+                                          */
                 }
                 else
                 {
-                    sql.Append(@"delete from data_temp
-                                    where cast(data_date as nvarchar) +
-                                          '_' +
-                                          cast(object as nvarchar) +
-                                          '_' +
-                                          cast(item as nvarchar) +
-                                          '_' +
-                                          cast(parnumber as nvarchar) in
-                                        (select cast(data_date as nvarchar) +
-                                          '_' +
-                                          cast(object as nvarchar) +
-                                          '_' +
-                                          cast(item as nvarchar) +
-                                          '_' +
-                                          cast(parnumber as nvarchar) idx
-                                          from data t)");
+                    sql.Append("DELETE FROM Data_Temp t WHERE EXISTS (SELECT * FROM Data WHERE ");
+                    sql.Append("Data.Parnumber=t.Parnumber AND Data.Object=T.Object AND ");
+                    sql.Append("Data.Item=t.Item AND Data.Data_Date=t.Data_Date)");
+                    //sql.Append(@"delete from data_temp
+                    //                where cast(data_date as nvarchar) +
+                    //                      '_' +
+                    //                      cast(object as nvarchar) +
+                    //                      '_' +
+                    //                      cast(item as nvarchar) +
+                    //                      '_' +
+                    //                      cast(parnumber as nvarchar) in
+                    //                    (select cast(data_date as nvarchar) +
+                    //                      '_' +
+                    //                      cast(object as nvarchar) +
+                    //                      '_' +
+                    //                      cast(item as nvarchar) +
+                    //                      '_' +
+                    //                      cast(parnumber as nvarchar) idx
+                    //                      from data t)");
                 }
                 cmd.CommandText = sql.ToString();
-                cmd.Transaction = tran;
+                cmd.CommandTimeout = 600;                
+                cmd.Transaction = tran;               
                 try
                 {
                     cmd.ExecuteNonQuery();

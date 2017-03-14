@@ -183,6 +183,7 @@ namespace XMLimport
                                                     Environment.NewLine + ex.InnerException.Message);
                                 main.XMLs.Remove(xml.Key);
                                 main.Disposables.Add(xml.Key);
+                                info[9] = DateTime.Now.ToString("HH:mm"); // Process ending time     
                                 info[10] = "Ошибка";
                                 main.Logger.WriteWorkingLog(info);
                                 main.MarkLogChanged(); 
