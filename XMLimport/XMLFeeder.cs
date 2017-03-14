@@ -191,7 +191,7 @@ namespace XMLimport
                             main.XMLs.Remove(xml.Key);
                             main.Disposables.Add(xml.Key);
                             main.CurrentInfo = info;
-                            main.LoadLog();
+                            main.MarkLogChanged();
                             EnsureExport(info);
                         }
                     }

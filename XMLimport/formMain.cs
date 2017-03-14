@@ -28,6 +28,7 @@ namespace XMLimport
         private string[] currentInfo;
         private int currentProgress;
         private string windowTitle = "Импорт данных из XML";
+        private bool logDirty = false;
 
         private object lockProperties = new object();
 
@@ -141,6 +142,8 @@ namespace XMLimport
             txtReport.Text = thrReport.ThreadState.ToString();
             ShowCurrentInfo();
             UpdateProgress();
+            if (logDirty)
+                LoadLog();
             //UpdateLog();
         }
 
@@ -304,14 +307,20 @@ namespace XMLimport
             txtCompleted.Text = CurrentProgress.ToString();
         }
 
-        public void LoadLog()
+        private void LoadLog()
+        {
+            dgvLog.Rows.Clear();
+            string[] lines = logger.WorkingLogLines.Reverse().ToArray();
+            foreach (string line in lines)
+                dgvLog.Rows.Add(line.Split(';'));
+            logDirty = false;
+        }
+
+        public void MarkLogChanged()
         {
             lock (lockProperties)
             {
-                dgvLog.Rows.Clear();
-                string[] lines = logger.WorkingLogLines.Reverse().ToArray();
-                foreach (string line in lines)
-                    dgvLog.Rows.Add(line.Split(';'));
+                logDirty = true;
             }
         }
 

@@ -29,6 +29,7 @@ namespace XMLimport
             csb.InitialCatalog = database;
             csb.UserID = userID;
             csb.Password = password;
+            csb.ConnectTimeout = 300;
             cs = csb.ConnectionString;
             this.season = season;
         }
