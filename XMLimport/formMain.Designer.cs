@@ -79,6 +79,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvLog = new System.Windows.Forms.DataGridView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuOpenInNotepad = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOpenInIE = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuToCheck = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuToProcess = new System.Windows.Forms.ToolStripMenuItem();
             this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +102,7 @@
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -520,6 +528,7 @@
             this.started,
             this.ended,
             this.status});
+            this.dgvLog.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLog.Location = new System.Drawing.Point(3, 158);
             this.dgvLog.MultiSelect = false;
@@ -532,6 +541,53 @@
             // timer1
             // 
             this.timer1.Interval = 1000;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuOpenInNotepad,
+            this.menuOpenInIE,
+            this.toolStripSeparator2,
+            this.menuToCheck,
+            this.toolStripSeparator3,
+            this.menuToProcess});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 104);
+            // 
+            // menuOpenInNotepad
+            // 
+            this.menuOpenInNotepad.Name = "menuOpenInNotepad";
+            this.menuOpenInNotepad.Size = new System.Drawing.Size(185, 22);
+            this.menuOpenInNotepad.Text = "Открыть в блокноте";
+            // 
+            // menuOpenInIE
+            // 
+            this.menuOpenInIE.Name = "menuOpenInIE";
+            this.menuOpenInIE.Size = new System.Drawing.Size(185, 22);
+            this.menuOpenInIE.Text = "Открыть в IE";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
+            // 
+            // menuToCheck
+            // 
+            this.menuToCheck.Name = "menuToCheck";
+            this.menuToCheck.Size = new System.Drawing.Size(185, 22);
+            this.menuToCheck.Text = "Проверить";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(182, 6);
+            // 
+            // menuToProcess
+            // 
+            this.menuToProcess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.menuToProcess.Name = "menuToProcess";
+            this.menuToProcess.Size = new System.Drawing.Size(185, 22);
+            this.menuToProcess.Text = "На конвейер";
             // 
             // fileName
             // 
@@ -567,7 +623,6 @@
             this.day.HeaderText = "день XML";
             this.day.Name = "day";
             this.day.ReadOnly = true;
-            this.day.Width = 80;
             // 
             // points
             // 
@@ -608,6 +663,7 @@
             this.status.HeaderText = "Статус";
             this.status.Name = "status";
             this.status.ReadOnly = true;
+            this.status.Width = 90;
             // 
             // formMain
             // 
@@ -628,6 +684,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLog)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -683,6 +740,13 @@
         private System.Windows.Forms.ToolStripMenuItem menuExportCodesList;
         private System.Windows.Forms.ToolStripMenuItem menuBlackList;
         private System.Windows.Forms.DataGridView dgvLog;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuOpenInNotepad;
+        private System.Windows.Forms.ToolStripMenuItem menuOpenInIE;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuToCheck;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem menuToProcess;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileSize;
         private System.Windows.Forms.DataGridViewTextBoxColumn inn;

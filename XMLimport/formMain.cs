@@ -92,7 +92,84 @@ namespace XMLimport
             menuIgnoreList.Click += MenuIgnoreList_Click;
             menuExportCodesList.Click += MenuExportCodesList_Click;
             menuBlackList.Click += MenuBlackList_Click;
+            menuOpenInNotepad.Click += MenuOpenInNotepad_Click;
+            menuOpenInIE.Click += MenuOpenInIE_Click;
+            menuToProcess.Click += MenuToProcess;
+            menuToCheck.Click += MenuToCheck;
             #endregion
+        }
+
+        private void MenuOpenInIE_Click(object sender, EventArgs e)
+        {
+            string selected, fileName;
+            string[] files;
+            if (dgvLog.SelectedCells.Count == 1)
+            {
+                selected = dgvLog[0, dgvLog.SelectedCells[0].RowIndex].Value.ToString();
+                fileName = Path.GetFileNameWithoutExtension(selected);
+                files = Directory.GetFiles(settings.ArchiveFolder, fileName + "*.xml");
+                if (files.Length > 0)
+                    System.Diagnostics.Process.Start("iexplore", files[files.Length - 1]);
+            }
+        }
+
+        private void MenuOpenInNotepad_Click(object sender, EventArgs e)
+        {
+            string selected, fileName;
+            string[] files;
+            if (dgvLog.SelectedCells.Count == 1)
+            {
+                selected = dgvLog[0, dgvLog.SelectedCells[0].RowIndex].Value.ToString();
+                fileName = Path.GetFileNameWithoutExtension(selected);
+                files = Directory.GetFiles(settings.ArchiveFolder, fileName + "*.xml");
+                if (files.Length > 0)
+                    System.Diagnostics.Process.Start("notepad", files[files.Length - 1]);
+            }
+        }
+
+        private void MenuToCheck(object sender, EventArgs e)
+        {
+            string selected, fileName;
+            string[] files;
+            if (dgvLog.SelectedCells.Count == 1)
+            {
+                selected = dgvLog[0, dgvLog.SelectedCells[0].RowIndex].Value.ToString();
+                fileName = Path.GetFileNameWithoutExtension(selected);
+                files = Directory.GetFiles(settings.ArchiveFolder, fileName + "*.xml");
+                if (files.Length > 0)
+                {
+                    formCheck frm = new formCheck(files[files.Length - 1]);
+                    frm.ShowDialog();
+                }
+            }
+        }
+
+        private void MenuToProcess(object sender, EventArgs e)
+        {
+            string selected = dgvLog[0, dgvLog.SelectedCells[0].RowIndex].Value.ToString();
+            string fileName = Path.GetFileNameWithoutExtension(selected);
+            string[] files = Directory.GetFiles(settings.ArchiveFolder, fileName + "*.xml");
+            if (files.Length > 0)
+            {
+                fileName = files[files.Length - 1];
+                try
+                {
+                    File.Move(fileName,
+                        Path.Combine(settings.InboxFolder, selected));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Невозможно переместить файл " + selected +
+                        Environment.NewLine + ex.Message, "Ошибка переноса XML на конвейер",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Файла " + selected + Environment.NewLine + " уже нет в архиве",
+                    "Ошибка переноса XML на конвейр",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void MenuBlackList_Click(object sender, EventArgs e)
@@ -334,5 +411,7 @@ namespace XMLimport
             result[3] = "Самодиагностика: " + thrReport.ThreadState.ToString();
             return result;
         }
+
+
     }
 }
