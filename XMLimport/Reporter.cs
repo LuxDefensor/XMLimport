@@ -48,7 +48,7 @@ namespace XMLimport
                         {
                             Thread.Sleep(500);
                             report = new StringBuilder();
-                            report.AppendLine("Отчёт о работоспособности компонентов АИИС КУЭ Пирамида 20000");
+                            report.AppendLine("Отчёт о работоспособности компонентов АИИС КУЭ Пирамида 2000");
                             xml = new XDocument();
                             try
                             {
@@ -125,6 +125,7 @@ namespace XMLimport
                                     "OK"
                                 };
                                 main.Logger.WriteWorkingLog(info);
+                                main.MarkLogChanged();
                                 File.Move(f, Path.Combine(s.ArchiveFolder,
                                                           Path.GetFileNameWithoutExtension(f) + "_arc" +
                                                           DateTime.Now.ToString("yyyyMMdd_HHmmss") +
@@ -143,11 +144,6 @@ namespace XMLimport
                 Thread.Sleep(1000);
             } // end of while(isRunning)
         } // end of the method
-
-        public void ParseTasks(XDocument xml)
-        {
-
-        }
 
 
         private bool SendMail(string report, string addressTo)
@@ -168,6 +164,7 @@ namespace XMLimport
             catch (Exception ex)
             {
                 main.Logger.WriteError("Не удалось отправить отчет на " + addressTo + ": " + ex.Message);
+                main.MarkLogChanged();
                 return false;
             }
             return true;

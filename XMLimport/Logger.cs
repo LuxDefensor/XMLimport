@@ -140,7 +140,11 @@ namespace XMLimport
             get
             {
                 lock (lockFiles)
-                    return File.ReadAllLines(errorLogPath).Last();
+                {
+                    string[] errors = File.ReadAllLines(errorLogPath);
+                    string result = errors[errors.Length - 2] + Environment.NewLine + errors[errors.Length - 1];
+                    return result;
+                }
             }
         }
     }
