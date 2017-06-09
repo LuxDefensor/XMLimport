@@ -104,8 +104,9 @@ namespace XMLimport
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.InnerException.Message, "Неверные данные",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message + Environment.NewLine + 
+                    ((ex.InnerException != null) ? ex.InnerException.Message : ""), "Неверные данные",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             this.DialogResult = DialogResult.OK;

@@ -234,6 +234,7 @@ namespace XMLimport
                         info[9] = DateTime.Now.ToString("HH:mm");
                         info[10] = "Экспорт ОК";
                         main.Logger.WriteWorkingLog(info);
+                        main.MarkLogChanged();
                     }
                 }
                 catch (Exception ex)
@@ -242,6 +243,7 @@ namespace XMLimport
                         Environment.NewLine + ex.Message);
                     return;
                 }
+                
             }
         }
     }

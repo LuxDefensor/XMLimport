@@ -14,6 +14,7 @@ namespace XMLimport
     {
         private formMain main;
         private Settings s;
+        private Model m;
         private XElement currentRoot;
         private string report;
         bool isRunning;
@@ -24,6 +25,7 @@ namespace XMLimport
         {
             this.main = main;
             s = new Settings();
+            m = new Model(s.Server, s.Database, s.UserName, s.Password, s.Season);
         }
 
         public void EndProcess()
@@ -66,6 +68,7 @@ namespace XMLimport
                             foreach (XElement job in xml.Root.Descendants("job"))
                             {
                                 report.AppendLine(new string('=', stringLength));
+                                report.AppendLine(); report.AppendLine();
                                 report.AppendLine(new string(' ', 5) + job.Attribute("description").Value);
                                 report.AppendLine(new string('-', stringLength));
                                 report.AppendLine();
@@ -99,6 +102,37 @@ namespace XMLimport
                                         break;
                                     case "scheduler":
                                         report.AppendLine(SchedulerStatus());
+                                        break;
+                                    case "getdata":
+                                        report.Append(GetData(job.Attribute("object").Value, job.Attribute("item").Value,
+                                            job.Attribute("parNumber").Value, job.Attribute("from").Value, job.Attribute("till").Value));
+                                        report.AppendLine();
+                                        break;
+                                    case "getfixed":
+                                        report.AppendLine(GetMomentData(job.Attribute("object").Value,
+                                                                        job.Attribute("item").Value,
+                                                                        101,
+                                                                        job.Attribute("date").Value));
+                                        break;
+                                    case "onehalfhour":
+                                        report.AppendLine(GetMomentData(job.Attribute("object").Value,
+                                                                        job.Attribute("item").Value,
+                                                                        12,
+                                                                        job.Attribute("date").Value));
+                                        break;
+                                    case "consumption12":
+                                        report.AppendLine(GetConsumption(job.Attribute("object").Value,
+                                                                         job.Attribute("item").Value,
+                                                                         "12",
+                                                                         job.Attribute("from").Value,
+                                                                         job.Attribute("till").Value));
+                                        break;
+                                    case "consumption101":
+                                        report.AppendLine(GetConsumption(job.Attribute("object").Value,
+                                                                         job.Attribute("item").Value,
+                                                                         "101",
+                                                                         job.Attribute("from").Value,
+                                                                         job.Attribute("till").Value));
                                         break;
                                     default:
                                         report.AppendLine("Неизвестная задача: " + job.Attribute("name").Value);
@@ -245,6 +279,54 @@ namespace XMLimport
                     break;
             }
             return result;
+        }
+
+        private string GetData(string objectCode, string itemCode, string parNumber, string dateFrom, string dateTill)
+        {
+            return ""; //TODO: Implement this feature
+        }
+
+        private string GetMomentData(string objectName, string itemName, int parameter, string moment)
+        {
+            StringBuilder result = new StringBuilder();
+            System.Data.DataTable items = m.FindChannels(objectName, (itemName == "all" || itemName == "" ? "" : itemName));
+            List<Tuple<int, int>> channels = new List<Tuple<int, int>>();
+            foreach (System.Data.DataRow row in items.Rows)
+            {
+                channels.Add(new Tuple<int, int>((int)row[0], (int)row[1]));
+            }
+            System.Data.DataTable data = m.GetMomentData(channels, parameter, moment);
+            result.AppendFormat("___ Объект ________________________ {0}", moment);
+            result.AppendLine();
+            foreach (System.Data.DataRow row in data.Rows)
+            {
+                result.AppendFormat("{0} {1} ___ {2}",row[0], row[1], row[2]);
+                result.AppendLine();
+            }
+            return result.ToString().TrimEnd();
+        }
+
+        private string GetConsumption(string objectName, string itemName, string parameter, string dateStart, string dateEnd)
+        {
+            StringBuilder result = new StringBuilder();
+            System.Data.DataTable items = m.FindChannels(objectName, (itemName == "all" || itemName == "" ? "" : itemName));
+            List<Tuple<int, int>> channels = new List<Tuple<int, int>>();
+            foreach (System.Data.DataRow row in items.Rows)
+            {
+                channels.Add(new Tuple<int, int>((int)row[0], (int)row[1]));
+            }
+            System.Data.DataTable data;
+            if (parameter == "12")
+                data = m.GetConsumption12(channels, dateStart, dateEnd);
+            else
+                data = m.GetConsumption101(channels, dateStart, dateEnd);
+            result.AppendFormat("      Потребление за период с {0} по {1}", dateStart, dateEnd);
+            result.AppendLine();
+            foreach (System.Data.DataRow row in data.Rows)
+            {
+                result.AppendLine(string.Join(" ___ ", row.ItemArray));
+            }
+            return result.ToString().TrimEnd();
         }
         #endregion
     }

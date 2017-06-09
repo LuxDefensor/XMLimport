@@ -325,7 +325,7 @@ namespace XMLimport
             string inbox, string archive, string exportFolder, bool autoStart, bool ignoreStatus,
             bool rewrite, string storeDepth, bool packArchive, string archiver, string maxErrorLogLines)
         {
-            string[] lines = new string[13];
+            string[] lines = new string[14];
             this.server = server;
             lines[0] = "Server=" + server;
             this.database = database;

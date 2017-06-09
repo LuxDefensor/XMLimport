@@ -732,5 +732,200 @@ namespace XMLimport
             }
         }
         #endregion
+
+        #region Acquiring data
+        public DataTable FindChannels(string deviceName, string sensorName = "")
+        {
+            DataTable result = new DataTable();
+            using (SqlConnection cn = new SqlConnection(cs))
+            {
+                cn.Open();
+                SqlCommand cmd = cn.CreateCommand();
+                StringBuilder sql = new StringBuilder();
+                sql.Append("SELECT d.Code, s.Code FROM Devices d INNER JOIN Sensors s ON d.ID=s.StationID ");
+                sql.AppendFormat("WHERE d.Name LIKE '{0}' ", deviceName);
+                if (sensorName != "")
+                    sql.AppendFormat("AND s.Name LIKE '{0}'", sensorName);
+                cmd.CommandText = sql.ToString();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    da.Fill(result);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(string.Format("Объект <{0}/{1}> не найден", deviceName, sensorName), ex);
+                }
+                if (result.Rows.Count == 0)
+                    throw new Exception(string.Format("Объект <{0}/{1}> не найден", deviceName, sensorName));
+                return result;
+            }
+        }
+
+        public DataTable GetData(List<Tuple<int, int>> channels, int parameter, DateTime dtStart, DateTime dtEnd)
+        {
+            DataTable result = new DataTable();
+            if (parameter == 12)
+                dtStart = dtStart.AddMinutes(30);
+            using (SqlConnection cn = new SqlConnection(cs))
+            {
+                cn.Open();
+                SqlCommand cmd = cn.CreateCommand();
+                StringBuilder sql = new StringBuilder();
+                sql.Append("SELECT d.Name, s.Name, Data_Date, Value0 FROM DATA INNER JOIN Devices d ON DATA.Object=d.Code ");
+                sql.Append("INNER JOIN Sensors s ON DATA.Item=s.Code AND d.ID=s.StationID ");
+                sql.AppendFormat("WHERE Parnumber={0} AND Data_Date between '{1}' AND '{2}' AND (",
+                    parameter, dtStart.ToString("yyyyMMdd HH:mm"), dtEnd.ToString("yyyyMMdd HH:mm"));
+                for (int i = 0; i < channels.Count; i++)
+                {
+                    sql.AppendFormat("(Object={0} AND Item={1})", channels[i].Item1, channels[i].Item2);
+                    if (i < channels.Count - 1)
+                        sql.Append(" OR ");
+                }
+                sql.Append(")");
+                cmd.CommandText = sql.ToString();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    da.Fill(result);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ошибка выгрузки данных в GetData", ex);
+                }
+            }
+            return result;
+        }
+
+        public DataTable GetItemData(int objectCode, int itemCode, int parameter, DateTime dtStart, DateTime dtEnd)
+        {
+            DataTable result = new DataTable();
+            if (parameter == 12)
+                dtStart = dtStart.AddMinutes(30);
+            using (SqlConnection cn = new SqlConnection(cs))
+            {
+                cn.Open();
+                SqlCommand cmd = cn.CreateCommand();
+                StringBuilder sql = new StringBuilder();
+                sql.Append("SELECT Data_Date, Value0 FROM DATA ");
+                sql.AppendFormat("WHERE Parnumber={0} AND Data_Date between '{1}' AND '{2}' ",
+                    parameter, dtStart.ToString("yyyyMMdd HH:mm"), dtEnd.ToString("yyyyMMdd HH:mm"));
+                sql.AppendFormat("AND Object={0} AND Item={1}");
+                cmd.CommandText = sql.ToString();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    da.Fill(result);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ошибка выгрузки данных в GetItemData для объекта " + objectCode + "." + itemCode, ex);
+                }
+            }
+            return result;
+        }
+
+        public DataTable GetMomentData(List<Tuple<int, int>> channels, int parameter, string moment)
+        {
+            DataTable result = new DataTable();
+            using (SqlConnection cn = new SqlConnection(cs))
+            {
+                cn.Open();
+                SqlCommand cmd = cn.CreateCommand();
+                StringBuilder sql = new StringBuilder();
+                sql.Append("SELECT d.Name, s.Name, Value0 FROM DATA INNER JOIN Devices d ON DATA.Object=d.Code ");
+                sql.Append("INNER JOIN Sensors s ON DATA.Item=s.Code AND d.ID=s.StationID ");
+                sql.AppendFormat("WHERE Parnumber={0} AND Data_Date='{1}' AND (", parameter, moment);
+                for (int i = 0; i < channels.Count; i++)
+                {
+                    sql.AppendFormat("(Object={0} AND Item={1})", channels[i].Item1, channels[i].Item2);
+                    if (i < channels.Count - 1)
+                        sql.Append(" OR ");
+                }
+                sql.Append(") ORDER BY 1,2");
+                cmd.CommandText = sql.ToString();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    da.Fill(result);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ошибка выгрузки данных в GetMomentData", ex);
+                }
+            }
+            return result;
+        }
+
+        public DataTable GetConsumption12(List<Tuple<int, int>> channels, string dateFrom, string dateTill)
+        {
+            DataTable result = new DataTable();
+            using (SqlConnection cn = new SqlConnection(cs))
+            {
+                cn.Open();
+                SqlCommand cmd = cn.CreateCommand();
+                StringBuilder sql = new StringBuilder();
+                sql.Append("SELECT d.Name, s.Name, sum(Value0)/2 consumption FROM DATA INNER JOIN Devices d ON DATA.Object=d.Code ");
+                sql.Append("INNER JOIN Sensors s ON DATA.Item=s.Code AND d.ID=s.StationID ");
+                sql.AppendFormat("WHERE Parnumber=12 AND Data_Date between '{0}' AND '{1}' AND (", dateFrom, dateTill);
+                for (int i = 0; i < channels.Count; i++)
+                {
+                    sql.AppendFormat("(Object={0} AND Item={1})", channels[i].Item1, channels[i].Item2);
+                    if (i < channels.Count - 1)
+                        sql.Append(" OR ");
+                }
+                sql.Append(") GROUP BY d.Name, s.Name ORDER BY 1,2");
+                cmd.CommandText = sql.ToString();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    da.Fill(result);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ошибка выгрузки данных в GetConsumption12", ex);
+                }
+            }
+            return result;
+        }
+
+        public DataTable GetConsumption101(List<Tuple<int, int>> channels, string dateFrom, string dateTill)
+        {
+            DataTable result = new DataTable();
+            using (SqlConnection cn = new SqlConnection(cs))
+            {
+                cn.Open();
+                SqlCommand cmd = cn.CreateCommand();
+                StringBuilder sql = new StringBuilder();
+                sql.AppendFormat(@"select d.NAME device,s.NAME sensor, data1.data_date startdate ,data1.VALUE0 startvelue,
+data2.DATA_DATE enddate, data2.VALUE0 endvalue, ktr.koef, (data2.VALUE0 - data1.VALUE0) * koef consumption
+from DATA data1 inner join data data2 on data1.OBJECT = data2.OBJECT and data1.ITEM = data2.ITEM
+ INNER JOIN DEVICES d on data1.OBJECT = d.CODE
+INNER JOIN SENSORS s ON DATA1.ITEM = s.CODE and d.ID = s.STATIONID
+left join ktr on s.ID = ktr.SensorID
+where data1.PARNUMBER = 101 and data2.PARNUMBER = 101 and data1.DATA_DATE = '{0}' and data2.DATA_DATE = '{1}'
+AND (", dateFrom, dateTill);
+                for (int i = 0; i < channels.Count; i++)
+                {
+                    sql.AppendFormat("(d.Code={0} AND s.Code={1})", channels[i].Item1, channels[i].Item2);
+                    if (i < channels.Count - 1)
+                        sql.Append(" OR ");
+                }
+                sql.Append(") ORDER BY 1,2");
+                cmd.CommandText = sql.ToString();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                try
+                {
+                    da.Fill(result);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ошибка выгрузки данных в GetConsumption101", ex);
+                }
+            }
+            return result;
+        }
+        #endregion
+
     }
 }
