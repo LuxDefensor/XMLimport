@@ -125,50 +125,62 @@ namespace XMLimport
                                                    int.Parse(info[4].Substring(6)));
                                 main.CurrentInfo = info;
                                 main.CurrentProgress = 0;
-                                foreach (XElement nodePoint in currentXML.Descendants("measuringpoint"))
+                                foreach (XElement nodeArea in currentXML.Descendants("area"))
                                 {
-                                    // Find all identifiers
-                                    objSpecCode = nodePoint.Attributes("code").First().Value;
-                                    Tuple<string, string> dev_subdev;
-                                    try
+                                    if (blackList.Contains(info[2] + ":" + nodeArea.Descendants("inn").First().Value))
                                     {
-                                        dev_subdev = m.FullSubdevice(objSpecCode);
-                                    }
-                                    catch
-                                    {
+                                        info[10] = "зона в ЧС";
+                                        main.CurrentInfo = info;
                                         continue;
                                     }
-                                    deviceCode = dev_subdev.Item1;
-                                    subdeviceCode = dev_subdev.Item2;
-                                    foreach (XElement nodeChannel in nodePoint.Descendants("measuringchannel"))
+                                    else
                                     {
-                                        channelCode = nodeChannel.Attributes("code").First().Value;
-                                        try
+                                        foreach (XElement nodePoint in nodeArea.Descendants("measuringpoint"))
                                         {
-                                            sensorCode = m.ItemCodeFromObject(channelCode, deviceCode, subdeviceCode);
-                                        }
-                                        catch
-                                        {
-                                            continue;
-                                        }
-                                        foreach (XElement nodeValue in nodeChannel.Descendants("period"))
-                                        {
-                                            extractTime = nodeValue.Attributes("end").First().Value;
-                                            if (extractTime == "0000")
-                                                timePoint = day.AddDays(1);
-                                            else
-                                                timePoint = new DateTime(day.Year, day.Month, day.Day,
-                                                    int.Parse(extractTime.Substring(0, 2)), int.Parse(extractTime.Substring(2)), 0);
-                                            XElement val = nodeValue.Descendants("value").First();
-                                            value = float.Parse(val.Value.Replace(',', '.'), System.Globalization.CultureInfo.GetCultureInfo("en-US"));
-                                            value *= 2;
-                                            if (IgnoreStatus || val.Attributes("status").Count() == 0 || val.Attributes("status").First().Value == "0")
+                                            // Find all identifiers
+                                            objSpecCode = nodePoint.Attributes("code").First().Value;
+                                            Tuple<string, string> dev_subdev;
+                                            try
                                             {
-                                                m.WriteOneRecord(12, timePoint, int.Parse(deviceCode), int.Parse(sensorCode),
-                                                    0, value.ToString().Replace(',', '.'), 0, 0, 0, rewrite);
-                                                completed++;
+                                                dev_subdev = m.FullSubdevice(objSpecCode);
                                             }
-                                            main.CurrentProgress = completed;
+                                            catch
+                                            {
+                                                continue;
+                                            }
+                                            deviceCode = dev_subdev.Item1;
+                                            subdeviceCode = dev_subdev.Item2;
+                                            foreach (XElement nodeChannel in nodePoint.Descendants("measuringchannel"))
+                                            {
+                                                channelCode = nodeChannel.Attributes("code").First().Value;
+                                                try
+                                                {
+                                                    sensorCode = m.ItemCodeFromObject(channelCode, deviceCode, subdeviceCode);
+                                                }
+                                                catch
+                                                {
+                                                    continue;
+                                                }
+                                                foreach (XElement nodeValue in nodeChannel.Descendants("period"))
+                                                {
+                                                    extractTime = nodeValue.Attributes("end").First().Value;
+                                                    if (extractTime == "0000")
+                                                        timePoint = day.AddDays(1);
+                                                    else
+                                                        timePoint = new DateTime(day.Year, day.Month, day.Day,
+                                                            int.Parse(extractTime.Substring(0, 2)), int.Parse(extractTime.Substring(2)), 0);
+                                                    XElement val = nodeValue.Descendants("value").First();
+                                                    value = float.Parse(val.Value.Replace(',', '.'), System.Globalization.CultureInfo.GetCultureInfo("en-US"));
+                                                    value *= 2;
+                                                    if (IgnoreStatus || val.Attributes("status").Count() == 0 || val.Attributes("status").First().Value == "0")
+                                                    {
+                                                        m.WriteOneRecord(12, timePoint, int.Parse(deviceCode), int.Parse(sensorCode),
+                                                            0, value.ToString().Replace(',', '.'), 0, 0, 0, rewrite);
+                                                        completed++;
+                                                    }
+                                                    main.CurrentProgress = completed;
+                                                }
+                                            }
                                         }
                                     }
                                 }
